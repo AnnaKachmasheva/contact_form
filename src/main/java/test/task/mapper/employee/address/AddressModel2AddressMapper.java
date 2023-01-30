@@ -1,4 +1,4 @@
-package test.task.mapper.employee;
+package test.task.mapper.employee.address;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

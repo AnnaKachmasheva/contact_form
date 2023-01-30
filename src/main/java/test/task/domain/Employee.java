@@ -2,6 +2,7 @@ package test.task.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import test.task.entity.enums.Gender;
 
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class Employee {
 
     private String name;

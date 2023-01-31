@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 class RequestControllerTest extends BaseControllerTestRunner {
 
     @InjectMocks
-    private RequestController requestController;
+    private RequestControllerImpl requestController;
 
     @BeforeEach
     public void setUp() {

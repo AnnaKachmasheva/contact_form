@@ -3,7 +3,6 @@ package test.task.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import test.task.entity.abstracts.AbstractClassEntity;
 
 import javax.persistence.Basic;
@@ -14,7 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Table(name = "ADDRESS")
 public class AddressEntity extends AbstractClassEntity {
@@ -35,4 +33,13 @@ public class AddressEntity extends AbstractClassEntity {
     @Basic(optional = false)
     private String street;
 
+    @Override
+    public String toString() {
+        return "AddressEntity{" +
+                "state='" + state +
+                ", city='" + city +
+                ", postal='" + postal +
+                ", street='" + street +
+                '}';
+    }
 }

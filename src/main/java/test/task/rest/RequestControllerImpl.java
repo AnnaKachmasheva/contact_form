@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/")
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
-public class RequestController {
+public class RequestControllerImpl {
 
    private final RequestModelValidation requestModelValidation;
     private final RequestAdapter requestAdapter;

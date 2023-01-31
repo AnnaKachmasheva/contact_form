@@ -18,8 +18,8 @@ public class EmployeeFacade {
     private final DeleteEmployeeUseCase deleteEmployeeUseCase;
     private final UpdateEmployeeUseCase updateEmployeeUseCase;
 
-    public void createEmployee(Employee employee) {
-        createEmployeeUseCase.execute(employee);
+    public Employee createEmployee(Employee employee) {
+        return createEmployeeUseCase.execute(employee);
     }
 
     public String login(String email, String password) {

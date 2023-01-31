@@ -25,7 +25,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
     private final EmployeeEntityMapper employeeEntityMapper;
 
     @Override
-    public void createEmployee(Employee employee) {
+    public Employee createEmployee(Employee employee) {
         var employeeEntityOptional =
                 employeeEntityRepository.findEmployeeEntitiesByEmail(employee.getEmail());
 
@@ -36,6 +36,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
 
             log.info(("Employee {} successfully created."), employee);
             employeeEntityRepository.save(employeeEntity);
+            return employeeEntityMapper.toEmployee(employeeEntityRepository.findEmployeeEntitiesByEmail(employee.getEmail()).get());
         } else {
             log.info(("Employee with email {} already exists."), employee.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

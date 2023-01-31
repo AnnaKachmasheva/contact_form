@@ -11,8 +11,8 @@ public class CreateEmployeeUseCase {
 
     private final EmployeeRepositoryAdapter adapter;
 
-    public void execute(Employee employee) {
-        adapter.createEmployee(employee);
+    public Employee execute(Employee employee) {
+        return adapter.createEmployee(employee);
     }
 
 }

@@ -3,7 +3,6 @@ package test.task.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import test.task.entity.abstracts.AbstractClassEntity;
 
 import javax.persistence.*;
@@ -11,7 +10,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name = "REQUEST")
 @NoArgsConstructor
 public class RequestEntity extends AbstractClassEntity {
@@ -35,4 +33,14 @@ public class RequestEntity extends AbstractClassEntity {
     @Basic(optional = false)
     private String description;
 
+    @Override
+    public String toString() {
+        return "RequestEntity{" +
+                "kindOfRequestEntity=" + kindOfRequestEntity +
+                ", policyNumber='" + policyNumber +
+                ", name='" + name +
+                ", surname='" + surname +
+                ", description='" + description +
+                '}';
+    }
 }

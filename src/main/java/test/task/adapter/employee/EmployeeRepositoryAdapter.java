@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface EmployeeRepositoryAdapter {
 
-    void createEmployee(Employee employee);
+    Employee createEmployee(Employee employee);
 
     Employee getEmployeeById(Long id);
 

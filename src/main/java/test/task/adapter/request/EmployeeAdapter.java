@@ -23,9 +23,9 @@ public class EmployeeAdapter {
     private final Employee2EmployeeModelMapper employee2EmployeeModelMapper;
     private final EmployeeEntityMapper employeeEntityMapper;
 
-    public void createEmployee(EmployeeModel employeeModel) {
+    public EmployeeModel createEmployee(EmployeeModel employeeModel) {
         Employee employee = employeeModel2EmployeeMapper.toEmployee(employeeModel);
-        employeeFacade.createEmployee(employee);
+        return employee2EmployeeModelMapper.toEmployeeModel(employeeFacade.createEmployee(employee));
     }
 
     public JwtAuthenticationResponse login(LoginModel loginModel) {

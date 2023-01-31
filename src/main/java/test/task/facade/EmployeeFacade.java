@@ -3,10 +3,7 @@ package test.task.facade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import test.task.domain.Employee;
-import test.task.use_case.employee.CreateEmployeeUseCase;
-import test.task.use_case.employee.GetAllEmployeesUseCase;
-import test.task.use_case.employee.GetEmployeeByIdUseCase;
-import test.task.use_case.employee.LogInEmployeeUseCase;
+import test.task.use_case.employee.*;
 
 import java.util.Set;
 
@@ -18,6 +15,8 @@ public class EmployeeFacade {
     private final LogInEmployeeUseCase logInEmployeeUseCase;
     private final GetEmployeeByIdUseCase getEmployeeByIdUseCase;
     private final GetAllEmployeesUseCase getAllEmployeesUseCase;
+    private final DeleteEmployeeUseCase deleteEmployeeUseCase;
+    private final UpdateEmployeeUseCase updateEmployeeUseCase;
 
     public void createEmployee(Employee employee) {
         createEmployeeUseCase.execute(employee);
@@ -33,6 +32,14 @@ public class EmployeeFacade {
 
     public Set<Employee> getAllEmployees() {
         return getAllEmployeesUseCase.execute();
+    }
+
+    public void deleteEmployee(Long id) {
+        deleteEmployeeUseCase.execute(id);
+    }
+
+    public Employee updateEmployee(Employee employee) {
+        return updateEmployeeUseCase.execute(employee);
     }
 
 }

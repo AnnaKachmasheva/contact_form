@@ -25,6 +25,7 @@ public class EmployeeEntityMapper {
         Set<Address> addresses = addressEntityMapper.toAddressSet(employeeEntity.getAddresses());
 
         Employee employee = new Employee();
+        employee.setId(employeeEntity.getId());
         employee.setName(employeeEntity.getName());
         employee.setSurname(employeeEntity.getSurname());
         employee.setGender(employeeEntity.getGender());

@@ -24,6 +24,7 @@ public class EmployeeModel2EmployeeMapper {
         Set<Address> addresses = addressModel2AddressMapper.toAddressSet(employeeModel.getAddresses());
 
         var employee = new Employee();
+        employee.setId(employeeModel.getId());
         employee.setName(employeeModel.getName());
         employee.setSurname(employeeModel.getSurname());
         employee.setPhone(employeeModel.getPhone());

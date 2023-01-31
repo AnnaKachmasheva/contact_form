@@ -11,4 +11,8 @@ public interface EmployeeRepositoryAdapter {
     Employee getEmployeeById(Long id);
 
     Set<Employee> getAllEmployees();
+
+    void deleteEmployee(Long id);
+
+   Employee updateEmployee(Employee employee);
 }

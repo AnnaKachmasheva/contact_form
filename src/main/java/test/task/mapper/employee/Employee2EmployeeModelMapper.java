@@ -23,6 +23,7 @@ public class Employee2EmployeeModelMapper {
         Set<AddressModel> addressModels = address2AddressModelMapper.toAddressModelSet(employee.getAddresses());
 
         EmployeeModel employeeModel = new EmployeeModel();
+        employeeModel.setId(employee.getId());
         employeeModel.setName(employee.getName());
         employeeModel.setSurname(employee.getSurname());
         employeeModel.setGender(employee.getGender().toString());

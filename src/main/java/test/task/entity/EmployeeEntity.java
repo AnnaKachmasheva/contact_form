@@ -60,4 +60,8 @@ public class EmployeeEntity extends AbstractClassEntity {
     @JsonIgnore
     private Set<AddressEntity> addresses;
 
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Boolean isRemoved;
+
 }

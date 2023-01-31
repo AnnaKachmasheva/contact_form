@@ -32,7 +32,8 @@ public class DefaultAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         final String email = authentication.getPrincipal().toString();
-        if (LOG.isDebugEnabled()) LOG.debug("Authenticating user {}", email);
+        if (LOG.isDebugEnabled())
+            LOG.debug("Authenticating user {}", email);
 
         final UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(email);
         final String password = (String) authentication.getCredentials();

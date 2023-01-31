@@ -1,14 +1,13 @@
 package test.task.exeption;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+public class BadRequestException extends DemoTestException {
 
-@Getter
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class BadRequestException extends RuntimeException {
+    public BadRequestException(String message) {
+        super(message);
+    }
 
-    private String message;
+    public static BadRequestException create(String resourceName) {
+        return new BadRequestException(resourceName + " bad request.");
+    }
 
 }

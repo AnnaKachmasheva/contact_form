@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class EmployeeModel {
 
+    private Long id;
     private String name;
     private String surname;
     private String dateOfBirt;

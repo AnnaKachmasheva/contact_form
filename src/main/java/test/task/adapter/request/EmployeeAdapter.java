@@ -43,4 +43,15 @@ public class EmployeeAdapter {
     public Set<EmployeeModel> getAllEmployees() {
         return employee2EmployeeModelMapper.toEmployeeModelSet(employeeFacade.getAllEmployees());
     }
+
+    public void deleteEmployee(Long id) {
+        employeeFacade.deleteEmployee(id);
+    }
+
+    public EmployeeModel updateEmployee(EmployeeModel employeeModel) {
+        Employee employee = employeeModel2EmployeeMapper.toEmployee(employeeModel);
+        return employee2EmployeeModelMapper.toEmployeeModel(employeeFacade.updateEmployee(employee));
+    }
+
+
 }

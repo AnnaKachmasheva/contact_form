@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     background: white;
@@ -6,6 +6,26 @@
 
 .window {
     margin-top: 10vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.window .modal-form {
+    display: flex;
+    gap: 20px;
+
+}
+
+.window .modal-form div {
+    flex: 50%;
+}
+
+.registration {
+    display: grid;
+
+    width: 50vw;
 }
 
 .modal-header {
@@ -112,4 +132,57 @@ button span {
 
 .error-input {
     border-color: #ff0044;
+}
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+
+/*menu style*/
+
+.menu {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+.menu span {
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+/*log in form style*/
+
+.button-form {
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.registration-link {
+    color: #0081af;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+table {
+    table-layout: fixed;
+    margin: 4px;
+
+    border-collapse: collapse;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    height: 4vh;
+    text-align: center;
 }

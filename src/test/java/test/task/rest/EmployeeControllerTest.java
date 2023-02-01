@@ -29,13 +29,10 @@ public class EmployeeControllerTest extends BaseControllerTestRunner {
 
     private EmployeeModel em;
 
-    @Test
-    void createEmployee_nullModelEmployee_BadRequest() {
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-
-        when(employeeRepositoryAdapter.createEmployee(any(Employee.class))).thenReturn(true);
-
-
-    }
+//    @Test
+//    void createEmployee_nullModelEmployee_BadRequest() {
+//        MockHttpServletRequest request = new MockHttpServletRequest();
+//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+//
+//    }
 }

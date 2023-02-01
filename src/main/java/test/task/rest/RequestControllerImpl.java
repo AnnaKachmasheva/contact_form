@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/contactus")
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
 public class RequestControllerImpl {

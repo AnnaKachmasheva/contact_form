@@ -5,13 +5,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
+import test.Generator;
+import test.task.adapter.request.RequestRepositoryAdapter;
 import test.task.model.RequestModel;
+import test.task.rest.interfaces.RequestController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -20,90 +25,27 @@ class RequestControllerTest extends BaseControllerTestRunner {
     @InjectMocks
     private RequestControllerImpl requestController;
 
+    @Mock
+    private RequestRepositoryAdapter requestRepositoryAdapter;
+
     @BeforeEach
     public void setUp() {
-        super.setUp(requestController);
+        super.setUp(requestRepositoryAdapter);
     }
 
     @Test
     void createRequest_emptyBody_statusIsBadRequest() throws Exception {
-        final RequestModel requestModel = new RequestModel();
+        final RequestModel requestModel = Generator.generateEmptyRequestModel();
 
-        mockMvc.perform(post("/")
-                .content(toJson("{\"description\":\"description\"," +
-                        "\"kindOfRequest\":\"Contract Adjustment\"," +
-                        "\"name\":\"name\"," +
-                        "\"policyNumber\":\"policy+Number1\"" +
-                        "\"surname\":\"surname\"" +
-                        "}"))
-                .contentType(MediaType.APPLICATION_JSON_VALUE));
+        mockMvc.perform(post("/contactus")
+                        .content(toJson(requestModel))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest());
 
-        final ArgumentCaptor<RequestModel> captor = ArgumentCaptor.forClass(RequestModel.class);
-        verify(requestController).createRequest(captor.capture());
+        final ArgumentCaptor<RequestModel> response = ArgumentCaptor.forClass(RequestModel.class);
+        verify(requestController).createRequest(response.capture());
+        assertEquals(requestModel.getName(), response.capture().getName());
 
-        assertEquals(requestModel, captor.getValue());
     }
-//
-//    @Test
-//    void createRequest_notValidPolicyNumber_statusIsBadRequest() throws Exception {
-//
-//        RequestBuilder request = post("/")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .content("{\"description\":\"description\"," +
-//                        "\"kindOfRequest\":\"Contract Adjustment\"," +
-//                        "\"name\":\"name\"," +
-//                        "\"policyNumber\":\"policy+Number1\"" +
-//                        "\"surname\":\"surname\"" +
-//                        "}")
-//                .contentType(MediaType.APPLICATION_JSON);
-//
-//        mockMvc.perform(request).andExpect(status().isBadRequest()).andReturn();
-//    }
-//
-//    @Test
-//    void createRequest_notValidName_statusIsBadRequest() throws Exception {
-//
-//        RequestBuilder request = post("/")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .content("{\"description\":\"description\"," +
-//                        "\"kindOfRequest\":\"Contract Adjustment\"," +
-//                        "\"name\":\"123=\"," +
-//                        "\"policyNumber\":\"policyNumber1\"" +
-//                        "\"surname\":\"surname\"" +
-//                        "}")
-//                .contentType(MediaType.APPLICATION_JSON);
-//
-//        mockMvc.perform(request).andExpect(status().isBadRequest()).andReturn();
-//    }
-//
-//    @Test
-//    void createRequest_notValidSurname_statusIsBadRequest() throws Exception {
-//
-//        RequestBuilder request = post("/")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .content("{\"description\":\"description\"," +
-//                        "\"kindOfRequest\":\"Contract Adjustment\"," +
-//                        "\"name\":\"Name\"," +
-//                        "\"policyNumber\":\"policyNumber1\"" +
-//                        "\"surname\":\"123_+\"" +
-//                        "}")
-//                .contentType(MediaType.APPLICATION_JSON);
-//
-//        mockMvc.perform(request).andExpect(status().isBadRequest()).andReturn();
-//    }
-//
-//    @Test
-//    void createRequest_validData_statusIsOk() throws Exception {
-//
-//        RequestBuilder request = post("/")
-//                .content("{\"description\":\"description\"," +
-//                        "\"kindOfRequest\":\"Contract Adjustment\"," +
-//                        "\"name\":\"Name\"," +
-//                        "\"policyNumber\":\"policyNumber1\"" +
-//                        "\"surname\":\"surname\"" +
-//                        "}")
-//                .contentType(MediaType.APPLICATION_JSON);
-//
-//        mockMvc.perform(request).andExpect(status().isOk()).andReturn();
-//    }
+
 }

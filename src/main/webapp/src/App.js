@@ -3,15 +3,19 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NewRequestPage from "./pages/request/NewRequestPage";
 import NewEmployeePage from "./pages/employee/NewEmployeePage";
 import LoginPage from "./pages/employee/LoginPage";
+import AboutUsPage from "./pages/global/AboutUsPage";
+import {DocumentationPage} from "./pages/global/DocumentationPage";
 
 function App() {
     return (
         <div>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/aboutus" element={<AboutUsPage/>}/>
                     <Route path="/contactus" element={<NewRequestPage/>}/>
                     <Route path="/employee" element={<NewEmployeePage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/documentation" element={<DocumentationPage/>}/>
                 </Routes>
             </BrowserRouter>
         </div>

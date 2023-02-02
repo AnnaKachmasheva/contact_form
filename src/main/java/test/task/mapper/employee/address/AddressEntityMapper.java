@@ -15,13 +15,12 @@ public class AddressEntityMapper {
     public Address toAddress(AddressEntity addressEntity) {
         if (addressEntity == null)
             return null;
-
-        return Address.builder()
-                .state(addressEntity.getState())
-                .city(addressEntity.getCity())
-                .street(addressEntity.getStreet())
-                .postal(addressEntity.getPostal())
-                .build();
+        Address address = new Address();
+        address.setState(addressEntity.getState());
+        address.setCity(addressEntity.getCity());
+        address.setStreet(addressEntity.getStreet());
+        address.setPostal(addressEntity.getPostal());
+        return address;
     }
 
     public Set<Address> toAddressSet(Set<AddressEntity> addressEntities) {

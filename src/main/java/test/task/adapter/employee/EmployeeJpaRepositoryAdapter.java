@@ -35,8 +35,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
             employeeEntity.setIsRemoved(false);
 
             log.info(("Employee {} successfully created."), employee);
-            employeeEntityRepository.save(employeeEntity);
-            return employeeEntityMapper.toEmployee(employeeEntityRepository.findEmployeeEntitiesByEmail(employee.getEmail()).get());
+            return employeeEntityMapper.toEmployee(employeeEntityRepository.save(employeeEntity));
         } else {
             log.info(("Employee with email {} already exists."), employee.getEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

@@ -24,7 +24,7 @@ public class Address2AddressEntityMapper {
         return addressEntity;
     }
 
-    public Set<AddressEntity> toAddressSet(Set<Address> addresses) {
+    public Set<AddressEntity> toAddressEntitySet(Set<Address> addresses) {
         Set<AddressEntity> addressEntities = new HashSet<>(addresses.size());
         for (Address address : addresses) {
             addressEntities.add(toAddressEntity(address));

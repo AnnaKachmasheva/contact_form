@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RequestModel {
 
+    private Long id;
     private String description;
     private String kindOfRequest;
     private String name;

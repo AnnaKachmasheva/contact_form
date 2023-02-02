@@ -1,12 +1,13 @@
 package test.task.domain;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class Request {
 
+    private Long id;
     private String kindOfRequest;
     private String policyNumber;
     private String name;

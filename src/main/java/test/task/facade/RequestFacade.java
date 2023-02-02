@@ -15,8 +15,8 @@ public class RequestFacade {
     private final CreateRequestUseCase createRequestUseCase;
     private final GetAllKindOfRequest getAllKindOfRequest;
 
-    public void createRequest(Request request) {
-        createRequestUseCase.execute(request);
+    public Request createRequest(Request request) {
+        return createRequestUseCase.execute(request);
     }
 
     public List<String> findAllKindOfRequest() {

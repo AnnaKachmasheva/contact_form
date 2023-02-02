@@ -17,12 +17,12 @@ public class AddressModel2AddressMapper {
         if (addressModel == null)
             return null;
 
-        return Address.builder()
-                .state(addressModel.getState())
-                .city(addressModel.getCity())
-                .street(addressModel.getStreet())
-                .postal(addressModel.getPostal())
-                .build();
+        Address address = new Address();
+        address.setState(addressModel.getState());
+        address.setCity(addressModel.getCity());
+        address.setPostal(addressModel.getPostal());
+        address.setStreet(addressModel.getStreet());
+        return address;
     }
 
     public Set<Address> toAddressSet(Set<AddressModel> addressModels) {

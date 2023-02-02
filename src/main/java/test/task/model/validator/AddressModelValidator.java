@@ -8,10 +8,10 @@ import test.task.model.utils.Constant;
 import java.util.Set;
 
 @Component
-public class AddressModelValidation {
+public class AddressModelValidator {
 
 
-    public void validation(Set<AddressModel> addressModels) {
+    public void validate(Set<AddressModel> addressModels) {
         for (AddressModel addressModel : addressModels) {
             var state = addressModel.getState();
             if (state.length() == Constant.MIN_LENGTH) {

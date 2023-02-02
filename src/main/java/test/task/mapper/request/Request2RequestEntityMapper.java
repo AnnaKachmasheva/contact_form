@@ -10,10 +10,12 @@ import test.task.entity.RequestEntity;
 @RequiredArgsConstructor
 public class Request2RequestEntityMapper {
 
-    public RequestEntity toRequestEntity(Request request, KindOfRequestEntity kindOfRequestEntity) {
+    public RequestEntity toRequestEntity(Request request) {
         if (request == null)
             return null;
         RequestEntity requestEntity = new RequestEntity();
+        KindOfRequestEntity kindOfRequestEntity = new KindOfRequestEntity();
+        kindOfRequestEntity.setName(request.getKindOfRequest());
         requestEntity.setKindOfRequestEntity(kindOfRequestEntity);
         requestEntity.setPolicyNumber(request.getPolicyNumber());
         requestEntity.setName(request.getName());

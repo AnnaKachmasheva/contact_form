@@ -2,9 +2,10 @@ package test.task.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class Address {
 
     private String state;

@@ -20,7 +20,7 @@ public class Employee2EmployeeEntityMapper {
         if (employee == null)
             return null;
 
-        Set<AddressEntity> addressEntitySet = address2AddressEntityMapper.toAddressSet(employee.getAddresses());
+        Set<AddressEntity> addressEntitySet = address2AddressEntityMapper.toAddressEntitySet(employee.getAddresses());
 
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setName(employee.getName());

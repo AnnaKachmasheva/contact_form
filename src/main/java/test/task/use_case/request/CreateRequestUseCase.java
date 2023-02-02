@@ -11,8 +11,8 @@ public class CreateRequestUseCase {
 
     private final RequestRepositoryAdapter adapter;
 
-    public void execute(Request request) {
-        adapter.createRequest(request);
+    public Request execute(Request request) {
+        return adapter.createRequest(request);
     }
 
 }

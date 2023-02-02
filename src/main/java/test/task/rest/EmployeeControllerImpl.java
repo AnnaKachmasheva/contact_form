@@ -7,10 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import test.task.adapter.request.EmployeeAdapter;
+import test.task.adapter.employee.EmployeeAdapter;
 import test.task.model.EmployeeModel;
-import test.task.model.validator.AddressModelValidation;
-import test.task.model.validator.EmployeeModelValidation;
+import test.task.model.validator.AddressModelValidator;
+import test.task.model.validator.EmployeeModelValidator;
 import test.task.rest.interfaces.EmployeeController;
 import test.task.security.CurrentUser;
 import test.task.security.model.LoginModel;
@@ -26,8 +26,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class EmployeeControllerImpl implements EmployeeController {
 
-    private final EmployeeModelValidation employeeModelValidation;
-    private final AddressModelValidation addressModelValidation;
+    private final EmployeeModelValidator employeeModelValidation;
+    private final AddressModelValidator addressModelValidation;
 
     private final EmployeeAdapter employeeAdapter;
 
@@ -36,8 +36,8 @@ public class EmployeeControllerImpl implements EmployeeController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/registration", produces = MediaType.APPLICATION_JSON_VALUE)
     public EmployeeModel createEmployee(@RequestBody EmployeeModel employeeModel) {
-        employeeModelValidation.validation(employeeModel);
-        addressModelValidation.validation(employeeModel.getAddresses());
+        employeeModelValidation.validate(employeeModel);
+        addressModelValidation.validate(employeeModel.getAddresses());
         return employeeAdapter.createEmployee(employeeModel);
     }
 

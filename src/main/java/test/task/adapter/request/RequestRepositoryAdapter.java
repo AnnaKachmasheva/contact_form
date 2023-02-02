@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RequestRepositoryAdapter {
 
-    void createRequest(Request request);
+    Request createRequest(Request request);
 
     List<String> getAllKindOfRequest();
 }

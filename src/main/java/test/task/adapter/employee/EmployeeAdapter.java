@@ -1,4 +1,4 @@
-package test.task.adapter.request;
+package test.task.adapter.employee;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

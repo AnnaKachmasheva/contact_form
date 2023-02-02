@@ -13,33 +13,49 @@ public class AddressModelValidator {
 
     public void validate(Set<AddressModel> addressModels) {
         for (AddressModel addressModel : addressModels) {
-            var state = addressModel.getState();
-            if (state.length() == Constant.MIN_LENGTH) {
-                throw new BadRequestException("The length of the state must be greater than 0.");
-            } else if (!state.matches(Constant.PATTERN_ALPHA)) {
-                throw new BadRequestException("State must be alpha.");
-            }
+            validateAddressIsNull(addressModel);
+            validateState(addressModel.getState());
+            validateCity(addressModel.getCity());
+            validateStreet(addressModel.getStreet());
+            validatePostal(addressModel.getPostal());
+        }
+    }
 
-            var city = addressModel.getCity();
-            if (city.length() == Constant.MIN_LENGTH) {
-                throw new BadRequestException("The length of the city must be greater than 0.");
-            } else if (!city.matches(Constant.PATTERN_ALPHA)) {
-                throw new BadRequestException("City must be alpha.");
-            }
+    public void validateAddressIsNull(AddressModel addressModel) {
+        if (addressModel == null) {
+            throw new BadRequestException("AddressModel is NULL.");
+        }
+    }
 
-            var street = addressModel.getStreet();
-            if (street.length() == Constant.MIN_LENGTH) {
-                throw new BadRequestException("The length of the street must be greater than 0.");
-            } else if (!street.matches(Constant.PATTERN_ALPHANUMERIC)) {
-                throw new BadRequestException("Street must be alphanumeric.");
-            }
+    public void validateState(String state) {
+        if (state.length() == Constant.MIN_LENGTH) {
+            throw new BadRequestException("The length of the state must be greater than 0.");
+        } else if (!state.matches(Constant.PATTERN_ALPHA)) {
+            throw new BadRequestException("State must be alpha.");
+        }
+    }
 
-            var postal = addressModel.getPostal();
-            if (postal.length() == Constant.MIN_LENGTH) {
-                throw new BadRequestException("The length of the postal must be greater than 0.");
-            } else if (!postal.matches(Constant.PATTERN_NUMERIC)) {
-                throw new BadRequestException("Postal must be alphanumeric.");
-            }
+    public void validateCity(String city) {
+        if (city.length() == Constant.MIN_LENGTH) {
+            throw new BadRequestException("The length of the city must be greater than 0.");
+        } else if (!city.matches(Constant.PATTERN_ALPHA)) {
+            throw new BadRequestException("City must be alpha.");
+        }
+    }
+
+    public void validateStreet(String street) {
+        if (street.length() == Constant.MIN_LENGTH) {
+            throw new BadRequestException("The length of the street must be greater than 0.");
+        } else if (!street.matches(Constant.PATTERN_ALPHANUMERIC)) {
+            throw new BadRequestException("Street must be alphanumeric.");
+        }
+    }
+
+    public void validatePostal(String postal) {
+        if (postal.length() == Constant.MIN_LENGTH) {
+            throw new BadRequestException("The length of the postal must be greater than 0.");
+        } else if (!postal.matches(Constant.PATTERN_NUMERIC)) {
+            throw new BadRequestException("Postal must be alphanumeric.");
         }
     }
 }

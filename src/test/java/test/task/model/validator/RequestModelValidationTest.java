@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 
 class RequestModelValidationTest {
 
-    private RequestModelValidator requestModelValidation = new RequestModelValidator();
+    private final RequestModelValidator requestModelValidation = new RequestModelValidator();
 
 
     @Test

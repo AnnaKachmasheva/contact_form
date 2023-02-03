@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 
-class RequestModelValidationTest {
+class RequestDTOValidationTest {
 
     private final RequestDTOValidator requestModelValidation = new RequestDTOValidator();
 

@@ -8,7 +8,7 @@ public class Constant {
     public static final String PATTERN_ALPHA = "^[a-zA-Z]+$";
     public static final String PATTERN_NUMERIC = "^[0-9]+$";
     public static final String PATTERN_ALPHANUMERIC = "^[a-zA-Z0-9]+$";
-    public static final String PATTERN_EMAIL = "^(.+)@(\\\\S+)$";
+    public static final String PATTERN_EMAIL = "^[\\\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\\\.[\\\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$";
     public static final String PATTERN_PHONE = "^\\\\d{9}$";
 
     private Constant() {

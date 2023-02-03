@@ -7,7 +7,7 @@ import test.task.rest.DTO.validator.AddressDTOValidator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-class AddressModelValidatorTest {
+class AddressDTOValidatorTest {
 
     private final AddressDTOValidator addressModelValidator = new AddressDTOValidator();
 

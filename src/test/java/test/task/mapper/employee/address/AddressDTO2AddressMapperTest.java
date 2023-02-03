@@ -4,21 +4,22 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.Generator;
 import test.task.domain.Address;
-import test.task.model.AddressModel;
+import test.task.rest.DTO.AddressDTO;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
-class AddressModel2AddressMapperTest {
+class AddressDTO2AddressMapperTest {
 
-    private AddressModel2AddressMapper addressModel2AddressMapper = new AddressModel2AddressMapper();
+    private final AddressDTO2AddressMapper addressDTO2AddressMapper = new AddressDTO2AddressMapper();
 
 
     @Test
     void toAddress_AddressModel_Address() {
-        AddressModel addressModel = Generator.generateValidAddressModel();
-        Address address = addressModel2AddressMapper.toAddress(addressModel);
+        AddressDTO addressModel = Generator.generateValidAddressDTO();
+        Address address = addressDTO2AddressMapper.toAddress(addressModel);
 
         Assertions.assertEquals(addressModel.getState(), address.getState());
         Assertions.assertEquals(addressModel.getCity(), address.getCity());
@@ -28,32 +29,29 @@ class AddressModel2AddressMapperTest {
 
     @Test
     void toAddress_AddressModelIsNull_AddressIsNull() {
-        AddressModel addressModel = null;
-        Address address = addressModel2AddressMapper.toAddress(addressModel);
-
-        Assertions.assertEquals(addressModel, address);
+        Address address = addressDTO2AddressMapper.toAddress(null);
+        Assertions.assertNull(address);
     }
 
     @Test
     void toAddressSet_AddressModelSet_AddressSet() {
         int countAddresses = 10;
-        Set<AddressModel> addressModelSet = new HashSet<>();
+        Set<AddressDTO> addressModelSet = new HashSet<>();
         while (countAddresses > 0) {
-            addressModelSet.add(Generator.generateValidAddressModel());
+            addressModelSet.add(Generator.generateValidAddressDTO());
             countAddresses--;
         }
 
-        Set<Address> addressSet = addressModel2AddressMapper.toAddressSet(addressModelSet);
+        Set<Address> addressSet = addressDTO2AddressMapper.toAddressSet(addressModelSet);
 
-        List<AddressModel> addressModelList = addressModelSet.stream().toList();
+        List<AddressDTO> addressModelList = addressModelSet.stream().toList();
         List<Address> addressList = addressSet.stream().toList();
 
-        for (int i = 0; i < countAddresses; i++) {
+        IntStream.range(0, countAddresses).forEach(i -> {
             Assertions.assertEquals(addressModelList.get(i).getState(), addressList.get(i).getState());
             Assertions.assertEquals(addressModelList.get(i).getCity(), addressList.get(i).getCity());
             Assertions.assertEquals(addressModelList.get(i).getPostal(), addressList.get(i).getPostal());
             Assertions.assertEquals(addressModelList.get(i).getStreet(), addressList.get(i).getStreet());
-
-        }
+        });
     }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import test.task.entity.enums.Gender;
+import test.task.entity.enums.UserRole;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -18,10 +19,11 @@ public class Employee {
     private String surname;
     private LocalDate dateOfBirt;
     private Gender gender;
-    private String userRole;
+    private UserRole userRole;
     private String position;
     private String email;
     private String phone;
+    private Boolean isRemoved;
     private Set<Address> addresses;
     private String password;
 

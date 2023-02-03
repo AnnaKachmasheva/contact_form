@@ -1,16 +1,15 @@
-package test.task.model.validator;
+package test.task.rest.validator;
 
 import org.junit.jupiter.api.Test;
 import test.Generator;
 import test.task.exeption.BadRequestException;
-
-import java.time.LocalDate;
+import test.task.rest.DTO.validator.EmployeeDTOValidator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class EmployeeModelValidatorTest {
 
-    private final EmployeeModelValidator employeeModelValidator = new EmployeeModelValidator();
+    private final EmployeeDTOValidator employeeModelValidator = new EmployeeDTOValidator();
 
     @Test
     void validateName_NameIsEmptyStr_BadRequestException() {

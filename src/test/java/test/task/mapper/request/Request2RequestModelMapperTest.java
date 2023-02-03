@@ -4,32 +4,28 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import test.Generator;
 import test.task.domain.Request;
-import test.task.model.RequestModel;
+import test.task.rest.DTO.RequestDTO;
 
 class Request2RequestModelMapperTest {
 
+    private final Request2RequestDTOMapper request2RequestModelMapper = new Request2RequestDTOMapper();
+
     @Test
     void toRequestModel_Request_RequestModel() {
-        Request2RequestModelMapper request2RequestModelMapper = new Request2RequestModelMapper();
-
         Request request = Generator.generateValidRequest();
-        RequestModel requestModel = request2RequestModelMapper.toRequestModel(request);
+        RequestDTO requestDTO = request2RequestModelMapper.toRequestDTO(request);
 
-        Assertions.assertEquals(request.getId(), requestModel.getId());
-        Assertions.assertEquals(request.getName(), requestModel.getName());
-        Assertions.assertEquals(request.getSurname(), requestModel.getSurname());
-        Assertions.assertEquals(request.getPolicyNumber(), requestModel.getPolicyNumber());
-        Assertions.assertEquals(request.getDescription(), requestModel.getDescription());
-        Assertions.assertEquals(request.getKindOfRequest(), requestModel.getKindOfRequest());
+        Assertions.assertEquals(request.getId(), requestDTO.getId());
+        Assertions.assertEquals(request.getName(), requestDTO.getName());
+        Assertions.assertEquals(request.getSurname(), requestDTO.getSurname());
+        Assertions.assertEquals(request.getPolicyNumber(), requestDTO.getPolicyNumber());
+        Assertions.assertEquals(request.getDescription(), requestDTO.getDescription());
+        Assertions.assertEquals(request.getKindOfRequest(), requestDTO.getKindOfRequest());
     }
 
     @Test
     void toRequest_RequestModelIsNull_RequestIsNull() {
-        Request2RequestModelMapper request2RequestModelMapper = new Request2RequestModelMapper();
-
-        Request request = null;
-        RequestModel requestModel = request2RequestModelMapper.toRequestModel(request);
-
-        Assertions.assertEquals(requestModel, request);
+        RequestDTO requestModel = request2RequestModelMapper.toRequestDTO(null);
+        Assertions.assertNull(requestModel);
     }
 }

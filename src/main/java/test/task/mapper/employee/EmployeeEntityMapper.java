@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import test.task.domain.Address;
 import test.task.domain.Employee;
 import test.task.entity.EmployeeEntity;
+import test.task.entity.enums.UserRole;
 import test.task.mapper.employee.address.AddressEntityMapper;
-import test.task.model.EmployeeModel;
 
 import java.util.HashSet;
 import java.util.List;
@@ -31,11 +31,12 @@ public class EmployeeEntityMapper {
         employee.setGender(employeeEntity.getGender());
         employee.setDateOfBirt(employeeEntity.getDateOfBirt());
         employee.setPosition(employeeEntity.getPosition());
-        employee.setUserRole(employeeEntity.getRole().toString());
+        employee.setUserRole(employeeEntity.getRole());
         employee.setEmail(employeeEntity.getEmail());
         employee.setPhone(employeeEntity.getPhone());
         employee.setAddresses(addresses);
         employee.setPassword(employeeEntity.getPassword());
+        employee.setIsRemoved(employeeEntity.getIsRemoved());
 
         return employee;
     }

@@ -1,4 +1,4 @@
-package test.task.model;
+package test.task.rest.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AddressModel {
+public class AddressDTO {
 
     private String state;
     private String city;

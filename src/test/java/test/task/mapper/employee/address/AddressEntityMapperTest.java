@@ -9,10 +9,11 @@ import test.task.entity.AddressEntity;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 class AddressEntityMapperTest {
 
-    private AddressEntityMapper addressEntityMapper = new AddressEntityMapper();
+    private final AddressEntityMapper addressEntityMapper = new AddressEntityMapper();
 
     @Test
     void toAddress_AddressEntity_Address() {
@@ -27,10 +28,8 @@ class AddressEntityMapperTest {
 
     @Test
     void toAddress_AddressEntityIsNull_AddressIsNull() {
-        AddressEntity addressEntity = null;
-        Address address = addressEntityMapper.toAddress(addressEntity);
-
-        Assertions.assertEquals(addressEntity, address);
+        Address address = addressEntityMapper.toAddress(null);
+        Assertions.assertNull(address);
     }
 
     @Test
@@ -47,12 +46,11 @@ class AddressEntityMapperTest {
         List<AddressEntity> addressEntityList = addressEntitySet.stream().toList();
         List<Address> addressList = addressSet.stream().toList();
 
-        for (int i = 0; i < countAddresses; i++) {
+        IntStream.range(0, countAddresses).forEach(i -> {
             Assertions.assertEquals(addressEntityList.get(i).getState(), addressList.get(i).getState());
             Assertions.assertEquals(addressEntityList.get(i).getCity(), addressList.get(i).getCity());
             Assertions.assertEquals(addressEntityList.get(i).getPostal(), addressList.get(i).getPostal());
             Assertions.assertEquals(addressEntityList.get(i).getStreet(), addressList.get(i).getStreet());
-
-        }
+        });
     }
 }

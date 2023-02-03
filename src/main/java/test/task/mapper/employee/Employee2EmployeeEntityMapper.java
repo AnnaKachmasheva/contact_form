@@ -28,12 +28,12 @@ public class Employee2EmployeeEntityMapper {
         employeeEntity.setGender(employee.getGender());
         employeeEntity.setDateOfBirt(employee.getDateOfBirt());
         employeeEntity.setPosition(employee.getPosition());
-        employeeEntity.setRole(UserRole.valueOf(employee.getUserRole()));
+        employeeEntity.setRole(employee.getUserRole());
         employeeEntity.setEmail(employee.getEmail());
         employeeEntity.setPhone(employee.getPhone());
         employeeEntity.setAddresses(addressEntitySet);
         employeeEntity.setPassword(employee.getPassword());
-
+        employeeEntity.setIsRemoved(employee.getIsRemoved());
         return employeeEntity;
     }
 }

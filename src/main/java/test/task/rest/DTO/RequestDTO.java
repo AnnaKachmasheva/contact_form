@@ -1,4 +1,4 @@
-package test.task.model;
+package test.task.rest.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RequestModel {
+public class RequestDTO {
 
     private Long id;
     private String description;

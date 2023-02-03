@@ -1,14 +1,15 @@
-package test.task.model.validator;
+package test.task.rest.validator;
 
 import org.junit.jupiter.api.Test;
 import test.Generator;
 import test.task.exeption.BadRequestException;
+import test.task.rest.DTO.validator.AddressDTOValidator;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class AddressModelValidatorTest {
 
-    private final AddressModelValidator addressModelValidator = new AddressModelValidator();
+    private final AddressDTOValidator addressModelValidator = new AddressDTOValidator();
 
     @Test
     void validateAddressIsNull_Null_BadRequestException() {

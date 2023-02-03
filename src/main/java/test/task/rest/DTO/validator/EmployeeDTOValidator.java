@@ -1,24 +1,24 @@
-package test.task.model.validator;
+package test.task.rest.DTO.validator;
 
 import org.springframework.stereotype.Component;
 import test.task.exeption.BadRequestException;
-import test.task.model.EmployeeModel;
-import test.task.model.utils.Constant;
+import test.task.rest.DTO.EmployeeDTO;
+import test.task.rest.util.Constant;
 
 import java.time.LocalDate;
 
 @Component
-public class EmployeeModelValidator {
+public class EmployeeDTOValidator {
 
-    public void validate(EmployeeModel employeeModel) {
-        validateName(employeeModel.getName());
-        validateSurname(employeeModel.getSurname());
-        validateDateOfBirth(employeeModel.getDateOfBirt());
-        validateGender(employeeModel.getGender());
-        validatePosition(employeeModel.getPosition());
-        validateEmaail(employeeModel.getEmail());
-        validatePhone(employeeModel.getPhone());
-        validatePassword(employeeModel.getPassword());
+    public void validate(EmployeeDTO employeeDTO) {
+        validateName(employeeDTO.getName());
+        validateSurname(employeeDTO.getSurname());
+        validateDateOfBirth(employeeDTO.getDateOfBirt());
+        validateGender(employeeDTO.getGender());
+        validatePosition(employeeDTO.getPosition());
+        validateEmaail(employeeDTO.getEmail());
+        validatePhone(employeeDTO.getPhone());
+        validatePassword(employeeDTO.getPassword());
     }
 
     public void validateName(String name) {

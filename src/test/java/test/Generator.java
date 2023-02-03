@@ -1,15 +1,23 @@
 package test;
 
+import org.h2.engine.User;
 import test.task.domain.Address;
+import test.task.domain.Employee;
 import test.task.domain.Request;
 import test.task.entity.AddressEntity;
+import test.task.entity.EmployeeEntity;
 import test.task.entity.KindOfRequestEntity;
 import test.task.entity.RequestEntity;
-import test.task.model.AddressModel;
-import test.task.model.EmployeeModel;
-import test.task.model.RequestModel;
+import test.task.entity.enums.Gender;
+import test.task.entity.enums.UserRole;
+import test.task.rest.DTO.AddressDTO;
+import test.task.rest.DTO.EmployeeDTO;
+import test.task.rest.DTO.RequestDTO;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Generator {
 
@@ -45,22 +53,70 @@ public class Generator {
         return RAND.nextBoolean();
     }
 
-    public static EmployeeModel generateEmptyEmployeeModel() {
-        return new EmployeeModel();
+    public static EmployeeDTO generateEmptyEmployeeModel() {
+        return new EmployeeDTO();
     }
 
-    public static EmployeeModel generateEmployeeModel() {
-        EmployeeModel employeeModel = new EmployeeModel();
-        //todo
-        return employeeModel;
+    public static EmployeeDTO generateEmployeeDTO() {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setId((long) randomInt());
+        employeeDTO.setName("name" + randomString());
+        employeeDTO.setSurname("surname" + randomString());
+        employeeDTO.setEmail("email" + randomString() + "@gmail.com");
+        employeeDTO.setGender("MALE");
+        employeeDTO.setPosition("MANAGER");
+        employeeDTO.setPhone("123456789");
+        employeeDTO.setUserRole("ADMIN");
+        employeeDTO.setDateOfBirt("2000-02-03");
+        employeeDTO.setPassword("123456789");
+        employeeDTO.setIsRemoved(randomBoolean());
+        int countAddresses = 5;
+        Set<AddressDTO> addressDTOSet = new HashSet<>();
+        while (countAddresses > 0) {
+            addressDTOSet.add(generateValidAddressDTO());
+            countAddresses--;
+        }
+        employeeDTO.setAddresses(addressDTOSet);
+        return employeeDTO;
     }
 
-    public static RequestModel generateEmptyRequestModel() {
-        return new RequestModel();
+    public static Employee generateEmployee() {
+        Employee employee = new Employee();
+        employee.setId((long) randomInt());
+        employee.setName("name" + randomString());
+        employee.setSurname("surname" + randomString());
+        employee.setEmail("email" + randomString() + "@gmail.com");
+        employee.setGender(Gender.MALE);
+        employee.setPosition("MANAGER");
+        employee.setPhone("123456789");
+        employee.setUserRole(UserRole.USER);
+        employee.setDateOfBirt(LocalDate.now());
+        employee.setPassword("123456789");
+        employee.setIsRemoved(randomBoolean());
+        Set<Address> addressSet = new HashSet<>();
+        employee.setAddresses(addressSet);
+        return employee;
     }
 
-    public static RequestModel generateValidRequestModel() {
-        RequestModel requestModel = new RequestModel();
+    public static EmployeeEntity generateEmployeeEntity() {
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setName("name" + randomString());
+        employeeEntity.setSurname("surname" + randomString());
+        employeeEntity.setEmail("email" + randomString() + "@gmail.com");
+        employeeEntity.setGender(Gender.MALE);
+        employeeEntity.setPosition("MANAGER");
+        employeeEntity.setPhone("123456789");
+        employeeEntity.setRole(UserRole.USER);
+        employeeEntity.setDateOfBirt(LocalDate.now());
+        employeeEntity.setPassword("123456789");
+        employeeEntity.setIsRemoved(randomBoolean());
+        Set<AddressEntity> addressSet = new HashSet<>();
+        employeeEntity.setAddresses(addressSet);
+        return employeeEntity;
+    }
+
+    public static RequestDTO generateValidRequestModel() {
+        RequestDTO requestModel = new RequestDTO();
         requestModel.setPolicyNumber("policyNumber" + randomString());
         requestModel.setName("name" + randomString());
         requestModel.setSurname("surname" + randomString());
@@ -93,26 +149,26 @@ public class Generator {
         return request;
     }
 
-    public static RequestModel generateRequestModelWithNotValidPolicyNumber() {
-        RequestModel requestModel = generateValidRequestModel();
+    public static RequestDTO generateRequestDTOWithNotValidPolicyNumber() {
+        RequestDTO requestModel = generateValidRequestModel();
         requestModel.setPolicyNumber(requestModel.getPolicyNumber() + "-");
         return requestModel;
     }
 
-    public static RequestModel generateRequestModelWithNotValidName() {
-        RequestModel requestModel = generateValidRequestModel();
+    public static RequestDTO generateRequestModelWithNotValidName() {
+        RequestDTO requestModel = generateValidRequestModel();
         requestModel.setName(requestModel.getName() + randomInt());
         return requestModel;
     }
 
-    public static RequestModel generateRequestModelWithNotValidSurname() {
-        RequestModel requestModel = generateValidRequestModel();
+    public static RequestDTO generateRequestDTOWithNotValidSurname() {
+        RequestDTO requestModel = generateValidRequestModel();
         requestModel.setSurname(requestModel.getSurname() + randomInt());
         return requestModel;
     }
 
-    public static RequestModel generateRequestModelWithNotDescription() {
-        RequestModel requestModel = generateValidRequestModel();
+    public static RequestDTO generateRequestDTOWithNotDescription() {
+        RequestDTO requestModel = generateValidRequestModel();
         int length = 5001;
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -141,8 +197,8 @@ public class Generator {
         return addressEntity;
     }
 
-    public static AddressModel generateValidAddressModel() {
-        AddressModel addressModel = new AddressModel();
+    public static AddressDTO generateValidAddressDTO() {
+        AddressDTO addressModel = new AddressDTO();
         addressModel.setState("state" + randomString());
         addressModel.setCity("city" + randomString());
         addressModel.setPostal("postal" + randomString() + randomInt());

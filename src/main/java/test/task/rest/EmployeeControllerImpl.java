@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import test.task.adapter.employee.EmployeeAdapter;
-import test.task.model.EmployeeModel;
-import test.task.model.validator.AddressModelValidator;
-import test.task.model.validator.EmployeeModelValidator;
+import test.task.rest.DTO.EmployeeDTO;
+import test.task.rest.DTO.validator.AddressDTOValidator;
+import test.task.rest.DTO.validator.EmployeeDTOValidator;
 import test.task.rest.interfaces.EmployeeController;
 import test.task.security.CurrentUser;
-import test.task.security.model.LoginModel;
+import test.task.security.model.LoginDTO;
 import test.task.security.model.UserDetailsImpl;
 
 import javax.validation.Valid;
@@ -26,8 +26,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class EmployeeControllerImpl implements EmployeeController {
 
-    private final EmployeeModelValidator employeeModelValidation;
-    private final AddressModelValidator addressModelValidation;
+    private final EmployeeDTOValidator employeeModelValidation;
+    private final AddressDTOValidator addressModelValidation;
 
     private final EmployeeAdapter employeeAdapter;
 
@@ -35,21 +35,21 @@ public class EmployeeControllerImpl implements EmployeeController {
     @Override
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/registration", produces = MediaType.APPLICATION_JSON_VALUE)
-    public EmployeeModel createEmployee(@RequestBody EmployeeModel employeeModel) {
-        employeeModelValidation.validate(employeeModel);
-        addressModelValidation.validate(employeeModel.getAddresses());
-        return employeeAdapter.createEmployee(employeeModel);
+    public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeModelValidation.validate(employeeDTO);
+        addressModelValidation.validate(employeeDTO.getAddresses());
+        return employeeAdapter.createEmployee(employeeDTO);
     }
 
     @Override
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> login(@RequestBody LoginModel loginModel) {
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginModel) {
         return ResponseEntity.ok(employeeAdapter.login(loginModel));
     }
 
     @Override
     @GetMapping(value = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
-    public EmployeeModel getCurrentEmployee(@CurrentUser UserDetailsImpl userDetails) {
+    public EmployeeDTO getCurrentEmployee(@CurrentUser UserDetailsImpl userDetails) {
         if (userDetails == null) {
             log.info("User details is empty.");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -60,7 +60,7 @@ public class EmployeeControllerImpl implements EmployeeController {
     //    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public EmployeeModel getEmployeeById(@Valid @PathVariable Long id) {
+    public EmployeeDTO getEmployeeById(@Valid @PathVariable Long id) {
         return employeeAdapter.getEmployeeById(id);
     }
 
@@ -68,7 +68,7 @@ public class EmployeeControllerImpl implements EmployeeController {
     //    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Set<EmployeeModel> getEmployees() {
+    public Set<EmployeeDTO> getEmployees() {
         return employeeAdapter.getAllEmployees();
     }
 
@@ -83,7 +83,7 @@ public class EmployeeControllerImpl implements EmployeeController {
     //    @PreAuthorize("hasAuthority('ROLE_ADMIN') || #id == authentication.principal.id")
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EmployeeModel> updateEmployee(@Valid @RequestBody(required = false) EmployeeModel employeeModel) {
+    public ResponseEntity<EmployeeDTO> updateEmployee(@Valid @RequestBody(required = false) EmployeeDTO employeeModel) {
         return ResponseEntity.ok(employeeAdapter.updateEmployee(employeeModel));
     }
 

@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 import test.task.domain.Employee;
 import test.task.entity.EmployeeEntity;
 import test.task.facade.EmployeeFacade;
-import test.task.mapper.employee.Employee2EmployeeModelMapper;
+import test.task.mapper.employee.Employee2EmployeeDTOMapper;
+import test.task.mapper.employee.EmployeeDTO2EmployeeMapper;
 import test.task.mapper.employee.EmployeeEntityMapper;
-import test.task.mapper.employee.EmployeeModel2EmployeeMapper;
-import test.task.model.EmployeeModel;
+import test.task.rest.DTO.EmployeeDTO;
 import test.task.security.jwt.JwtAuthenticationResponse;
-import test.task.security.model.LoginModel;
+import test.task.security.model.LoginDTO;
 
 import java.util.Set;
 
@@ -19,39 +19,38 @@ import java.util.Set;
 public class EmployeeAdapter {
 
     private final EmployeeFacade employeeFacade;
-    private final EmployeeModel2EmployeeMapper employeeModel2EmployeeMapper;
-    private final Employee2EmployeeModelMapper employee2EmployeeModelMapper;
+    private final EmployeeDTO2EmployeeMapper employeeDTO2EmployeeMapper;
+    private final Employee2EmployeeDTOMapper employee2EmployeeDTOMapper;
     private final EmployeeEntityMapper employeeEntityMapper;
 
-    public EmployeeModel createEmployee(EmployeeModel employeeModel) {
-        Employee employee = employeeModel2EmployeeMapper.toEmployee(employeeModel);
-        return employee2EmployeeModelMapper.toEmployeeModel(employeeFacade.createEmployee(employee));
+    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = employeeDTO2EmployeeMapper.toEmployee(employeeDTO);
+        return employee2EmployeeDTOMapper.toEmployeeDTO(employeeFacade.createEmployee(employee));
     }
 
-    public JwtAuthenticationResponse login(LoginModel loginModel) {
-        return new JwtAuthenticationResponse(employeeFacade.login(loginModel.getEmail(), loginModel.getPassword()));
+    public JwtAuthenticationResponse login(LoginDTO loginDTO) {
+        return new JwtAuthenticationResponse(employeeFacade.login(loginDTO.getEmail(), loginDTO.getPassword()));
     }
 
-    public EmployeeModel getCurrentEmployee(EmployeeEntity employeeEntity) {
-        return employee2EmployeeModelMapper.toEmployeeModel(employeeEntityMapper.toEmployee(employeeEntity));
+    public EmployeeDTO getCurrentEmployee(EmployeeEntity employeeEntity) {
+        return employee2EmployeeDTOMapper.toEmployeeDTO(employeeEntityMapper.toEmployee(employeeEntity));
     }
 
-    public EmployeeModel getEmployeeById(Long id) {
-        return employee2EmployeeModelMapper.toEmployeeModel(employeeFacade.getEmployeeById(id));
+    public EmployeeDTO getEmployeeById(Long id) {
+        return employee2EmployeeDTOMapper.toEmployeeDTO(employeeFacade.getEmployeeById(id));
     }
 
-    public Set<EmployeeModel> getAllEmployees() {
-        return employee2EmployeeModelMapper.toEmployeeModelSet(employeeFacade.getAllEmployees());
+    public Set<EmployeeDTO> getAllEmployees() {
+        return employee2EmployeeDTOMapper.toEmployeeDTOSet(employeeFacade.getAllEmployees());
     }
 
     public void deleteEmployee(Long id) {
         employeeFacade.deleteEmployee(id);
     }
 
-    public EmployeeModel updateEmployee(EmployeeModel employeeModel) {
-        Employee employee = employeeModel2EmployeeMapper.toEmployee(employeeModel);
-        return employee2EmployeeModelMapper.toEmployeeModel(employeeFacade.updateEmployee(employee));
+    public EmployeeDTO updateEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = employeeDTO2EmployeeMapper.toEmployee(employeeDTO);
+        return employee2EmployeeDTOMapper.toEmployeeDTO(employeeFacade.updateEmployee(employee));
     }
-
 
 }

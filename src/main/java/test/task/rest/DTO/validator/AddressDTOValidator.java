@@ -1,27 +1,27 @@
-package test.task.model.validator;
+package test.task.rest.DTO.validator;
 
 import org.springframework.stereotype.Component;
 import test.task.exeption.BadRequestException;
-import test.task.model.AddressModel;
-import test.task.model.utils.Constant;
+import test.task.rest.DTO.AddressDTO;
+import test.task.rest.util.Constant;
 
 import java.util.Set;
 
 @Component
-public class AddressModelValidator {
+public class AddressDTOValidator {
 
 
-    public void validate(Set<AddressModel> addressModels) {
-        for (AddressModel addressModel : addressModels) {
-            validateAddressIsNull(addressModel);
-            validateState(addressModel.getState());
-            validateCity(addressModel.getCity());
-            validateStreet(addressModel.getStreet());
-            validatePostal(addressModel.getPostal());
+    public void validate(Set<AddressDTO> addressesDTO) {
+        for (AddressDTO addressDTO : addressesDTO) {
+            validateAddressIsNull(addressDTO);
+            validateState(addressDTO.getState());
+            validateCity(addressDTO.getCity());
+            validateStreet(addressDTO.getStreet());
+            validatePostal(addressDTO.getPostal());
         }
     }
 
-    public void validateAddressIsNull(AddressModel addressModel) {
+    public void validateAddressIsNull(AddressDTO addressModel) {
         if (addressModel == null) {
             throw new BadRequestException("AddressModel is NULL.");
         }

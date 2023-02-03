@@ -1,4 +1,4 @@
-package test.task.model.utils;
+package test.task.rest.util;
 
 public class Constant {
     public static final int MIN_LENGTH = 0;

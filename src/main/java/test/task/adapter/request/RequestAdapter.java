@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import test.task.domain.Request;
 import test.task.facade.RequestFacade;
-import test.task.mapper.request.Request2RequestEntityMapper;
-import test.task.mapper.request.Request2RequestModelMapper;
-import test.task.mapper.request.RequestModel2RequestMapper;
-import test.task.model.RequestModel;
+import test.task.mapper.request.Request2RequestDTOMapper;
+import test.task.mapper.request.RequestDTO2RequestMapper;
+import test.task.rest.DTO.RequestDTO;
 
 import java.util.List;
 
@@ -16,12 +15,12 @@ import java.util.List;
 public class RequestAdapter {
 
     private final RequestFacade requestFacade;
-    private final RequestModel2RequestMapper requestModel2RequestMapper;
-    private final Request2RequestModelMapper request2RequestModelMapper;
+    private final RequestDTO2RequestMapper requestModel2RequestMapper;
+    private final Request2RequestDTOMapper request2RequestModelMapper;
 
-    public RequestModel createRequest(RequestModel requestModel) {
-        Request request = requestModel2RequestMapper.toRequest(requestModel);
-        return request2RequestModelMapper.toRequestModel(requestFacade.createRequest(request));
+    public RequestDTO createRequest(RequestDTO requestDTO) {
+        Request request = requestModel2RequestMapper.toRequest(requestDTO);
+        return request2RequestModelMapper.toRequestDTO(requestFacade.createRequest(request));
     }
 
     public List<String> findAllKindOfRequest() {

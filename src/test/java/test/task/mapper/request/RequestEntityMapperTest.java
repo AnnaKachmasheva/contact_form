@@ -8,10 +8,11 @@ import test.task.entity.RequestEntity;
 
 class RequestEntityMapperTest {
 
+    private final RequestEntityMapper requestEntityMapper = new RequestEntityMapper();
+
+
     @Test
     void toRequest_RequestEntity_Request() {
-        RequestEntityMapper requestEntityMapper = new RequestEntityMapper();
-
         RequestEntity requestEntity = Generator.generateValidRequestEntity();
         Request request = requestEntityMapper.toRequest(requestEntity);
 
@@ -25,11 +26,7 @@ class RequestEntityMapperTest {
 
     @Test
     void toRequest_RequestModelIsNull_RequestIsNull() {
-        RequestEntityMapper requestEntityMapper = new RequestEntityMapper();
-
-        RequestEntity requestEntity = null;
-        Request request = requestEntityMapper.toRequest(requestEntity);
-
-        Assertions.assertEquals(requestEntity, request);
+        Request request = requestEntityMapper.toRequest(null);
+        Assertions.assertNull(request);
     }
 }

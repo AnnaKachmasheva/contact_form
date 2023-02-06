@@ -10,6 +10,8 @@ public interface EmployeeRepositoryAdapter {
 
     Employee getEmployeeById(Long id);
 
+    Employee getEmployeeByEmail(String email);
+
     Set<Employee> getAllEmployees();
 
     void deleteEmployee(Long id);

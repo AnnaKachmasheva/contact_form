@@ -27,7 +27,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
     @Override
     public Employee createEmployee(Employee employee) {
         var employeeEntityOptional =
-                employeeEntityRepository.findEmployeeEntitiesByEmail(employee.getEmail());
+                employeeEntityRepository.findEmployeeEntityByEmail(employee.getEmail());
 
         if (employeeEntityOptional.isEmpty()) {
             EmployeeEntity employeeEntity = employee2EmployeeEntityMapper.toEmployeeEntity(employee);
@@ -56,6 +56,19 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
     }
 
     @Override
+    public Employee getEmployeeByEmail(String email) {
+        var employeeEntityOptional = employeeEntityRepository.findEmployeeEntityByEmail(email);
+        if (employeeEntityOptional.isPresent()) {
+            Employee employee = employeeEntityMapper.toEmployee(employeeEntityOptional.get());
+            log.info(("Employee with email {} found {}."), email, employee);
+            return employee;
+        } else {
+            log.info(("Employee with email {} not found."), email);
+            throw new EmployeeNotFoundException("Employee not fond.");
+        }
+    }
+
+    @Override
     public Set<Employee> getAllEmployees() {
         var employeeEntities = employeeEntityRepository.findAll();
         Set<Employee> employees = employeeEntityMapper.toEmployeesSet(employeeEntities);
@@ -78,10 +91,9 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
     public Employee updateEmployee(Employee employee) {
         var employeeEntityOptional = employeeEntityRepository.findEmployeeEntityById(employee.getId());
         if (employeeEntityOptional.isPresent()) {
-            EmployeeEntity employeeEntity = employee2EmployeeEntityMapper.toEmployeeEntity(employee);
-            employeeEntityRepository.save(employeeEntity);
-            log.info(("Update employee {} to {}."), employeeEntityOptional.get(), employee);
-            return employeeEntityMapper.toEmployee(employeeEntityRepository.getById(employee.getId()));
+            EmployeeEntity updatedEmployee = employeeEntityRepository.save(employee2EmployeeEntityMapper.toEmployeeEntity(employee));
+            log.info(("Update employee {} to {}."), employeeEntityOptional.get(), updatedEmployee);
+            return employeeEntityMapper.toEmployee(updatedEmployee);
         } else {
             log.info(("Employee with id {} not found."), employee.getId());
             throw new EmployeeNotFoundException("Employee not fond.");

@@ -1,6 +1,8 @@
 import {useFormik} from "formik";
 import {useState} from "react";
 import axios from "axios";
+import styles from './NewEmployeePage.module.scss'
+
 
 function NewRequestPage() {
 
@@ -111,7 +113,7 @@ function NewRequestPage() {
         <div className="window">
 
             <div onClick={(e) => e.stopPropagation()}
-                 className="registration">
+                 className={'container'}>
 
                 <div className="modal-header">
                     <h1>Registration</h1>
@@ -122,7 +124,7 @@ function NewRequestPage() {
                     <div>
                         <label htmlFor="name">Name</label>
                         <input id="name"
-                               className={formik.errors.name ? "error-input" : "success-input"}
+                               className={formik.errors.name ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.name}
@@ -132,7 +134,7 @@ function NewRequestPage() {
 
                         <label htmlFor="surname">Surname</label>
                         <input id="surname"
-                               className={formik.errors.surname ? "error-input" : "success-input"}
+                               className={formik.errors.surname ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.surname}
@@ -142,7 +144,7 @@ function NewRequestPage() {
 
                         <label htmlFor="dateOfBirth">Date of Birth</label>
                         <input id="dateOfBirth"
-                               className={formik.errors.dateOfBirth ? "error-input" : "success-input"}
+                               className={formik.errors.dateOfBirth ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.dateOfBirth}
@@ -165,7 +167,7 @@ function NewRequestPage() {
 
                         <label htmlFor="position">Position</label>
                         <input id="position"
-                               className={formik.errors.position ? "error-input" : "success-input"}
+                               className={formik.errors.position ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.position}
@@ -175,7 +177,7 @@ function NewRequestPage() {
 
                         <label htmlFor="email">Email</label>
                         <input id="email"
-                               className={formik.errors.email ? "error-input" : "success-input"}
+                               className={formik.errors.email ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.email}
@@ -186,7 +188,7 @@ function NewRequestPage() {
 
                         <label htmlFor="phone">Phone</label>
                         <input id="phone"
-                               className={formik.errors.phone ? "error-input" : "success-input"}
+                               className={formik.errors.phone ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.phone}
@@ -197,7 +199,7 @@ function NewRequestPage() {
 
                         <label htmlFor="password">Password</label>
                         <input id="password"
-                               className={formik.errors.password ? "error-input" : "success-input"}
+                               className={formik.errors.password ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.password}
@@ -208,7 +210,7 @@ function NewRequestPage() {
 
                         <label htmlFor="passwordConfirm">Confirm password</label>
                         <input id="passwordConfirm"
-                               className={formik.errors.password ? "error-input" : "success-input"}
+                               className={formik.errors.password ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.passwordConfirm}
@@ -233,7 +235,7 @@ function NewRequestPage() {
 
                         <label htmlFor="state">State</label>
                         <input id="state"
-                               className={formik.errors.state ? "error-input" : "success-input"}
+                               className={formik.errors.state ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.state}
@@ -243,7 +245,7 @@ function NewRequestPage() {
 
                         <label htmlFor="city">City</label>
                         <input id="city"
-                               className={formik.errors.city ? "error-input" : "success-input"}
+                               className={formik.errors.city ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.city}
@@ -253,7 +255,7 @@ function NewRequestPage() {
 
                         <label htmlFor="street">Street</label>
                         <input id="street"
-                               className={formik.errors.street ? "error-input" : "success-input"}
+                               className={formik.errors.street ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.street}
@@ -263,7 +265,7 @@ function NewRequestPage() {
 
                         <label htmlFor="postal">Postal</label>
                         <input id="postal"
-                               className={formik.errors.postal ? "error-input" : "success-input"}
+                               className={formik.errors.postal ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.postal}
@@ -279,7 +281,7 @@ function NewRequestPage() {
                         {/*</div>*/}
 
                         <div className="button-form">
-                            <button className="send-button"
+                            <button className="button-primary"
                                     type="submit">
                                 <span>CREATE EMPLOYEE</span>
                             </button>

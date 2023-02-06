@@ -60,7 +60,7 @@ function LoginPage() {
 
                     <label htmlFor="email">Email</label>
                     <input id="email"
-                           className={formik.errors.email ? "error-input" : "success-input"}
+                           className={formik.errors.email ? "input-primary error" : "input-primary correct"}
                            onChange={formik.handleChange}
                            onBlur={formik.handleBlur}
                            value={formik.values.email}
@@ -72,7 +72,7 @@ function LoginPage() {
 
                     <label htmlFor="password">Password</label>
                     <input id="password"
-                           className={formik.errors.password ? "error-input" : "success-input"}
+                           className={formik.errors.password ? "input-primary error" : "input-primary correct"}
                            onChange={formik.handleChange}
                            onBlur={formik.handleBlur}
                            value={formik.values.password}
@@ -87,7 +87,7 @@ function LoginPage() {
                             Registration
                         </a>
 
-                        <button className="send-button"
+                        <button className="button-primary"
                                 type="submit">
                             <span>CONTUNE</span>
                         </button>

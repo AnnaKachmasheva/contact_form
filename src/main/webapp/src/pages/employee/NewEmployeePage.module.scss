@@ -1,0 +1,21 @@
+.registration-link {
+  color: #0081af;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+table {
+  table-layout: fixed;
+  margin: 4px;
+
+  border-collapse: collapse;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  height: 4vh;
+  text-align: center;
+}
+

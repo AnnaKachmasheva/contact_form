@@ -110,7 +110,7 @@ function NewRequestPage() {
 
                             <label htmlFor="policyNumber">Policy Number</label>
                             <input id="policyNumber"
-                                   className={formik.errors.policyNumber ? "error-input" : "success-input"}
+                                   className={formik.errors.policyNumber ? "input-primary error" : "input-primary correct"}
                                    onChange={formik.handleChange}
                                    onBlur={formik.handleBlur}
                                    value={formik.values.policyNumber}
@@ -119,7 +119,7 @@ function NewRequestPage() {
 
                             <label htmlFor="name">Name</label>
                             <input id="name"
-                                   className={formik.errors.name ? "error-input" : "success-input"}
+                                   className={formik.errors.name ? "input-primary error" : "input-primary correct"}
                                    onChange={formik.handleChange}
                                    onBlur={formik.handleBlur}
                                    value={formik.values.name}
@@ -128,7 +128,7 @@ function NewRequestPage() {
 
                             <label htmlFor="surname">Surname</label>
                             <input id="surname"
-                                   className={formik.errors.surname ? "error-input" : "success-input"}
+                                   className={formik.errors.surname ? "input-primary error" : "input-primary correct"}
                                    onChange={formik.handleChange}
                                    onBlur={formik.handleBlur}
                                    value={formik.values.surname}
@@ -137,7 +137,7 @@ function NewRequestPage() {
 
                             <label htmlFor="description">Your request</label>
                             <textarea id="description"
-                                      className={formik.errors.description ? "error-input" : "success-input"}
+                                      className={formik.errors.description ? "input-primary error" : "input-primary correct"}
                                       onChange={formik.handleChange}
                                       onBlur={formik.handleBlur}
                                       value={formik.values.description}
@@ -151,7 +151,7 @@ function NewRequestPage() {
                         </div>
 
                         <div className="button-form">
-                            <button className="send-button"
+                            <button className="button-primary"
                                     type="submit">
                                 <span>SEND REQUEST</span>
                             </button>

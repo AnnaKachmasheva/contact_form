@@ -1,0 +1,17 @@
+.menu {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-flow: column;
+
+  button {
+    margin: 10px;
+    width: 20vw;
+  }
+}
+
+.menu span {
+  font-size: 1rem;
+  text-decoration: none;
+}

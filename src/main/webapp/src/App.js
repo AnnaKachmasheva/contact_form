@@ -1,3 +1,4 @@
+import './App.scss';
 import React from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import NewRequestPage from "./pages/request/NewRequestPage";

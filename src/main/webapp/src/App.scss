@@ -1,5 +1,6 @@
 body {
   overflow-x: hidden;
+  display: block;
 }
 
 .button-primary {
@@ -102,7 +103,42 @@ label {
   padding-top: 20px;
   font-size: 18px;
 }
+.error {
+  color: #ff0044;
+  font-size: 14px;
+}
 
-.container {
-  min-width: 50vw;
+form {
+  width: 460px;
+
+  button {
+    margin: 30px 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  a {
+    margin: 10px 0;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 182px;
+    border: 2px solid deepskyblue;
+    border-radius: 4px;
+
+    color: deepskyblue;
+    background: none;
+
+    font-size: 14px;
+  }
+
+  a:hover {
+    background: #0081af;
+    border-color: #0081af;
+    color: white;
+  }
+
+  a:active {
+    background-color: #025e7f;
+    border-color: #025e7f;
+  }
 }

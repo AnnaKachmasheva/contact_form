@@ -1,42 +1,75 @@
 import {useFormik} from "formik";
-import {useState} from "react";
 import axios from "axios";
 import styles from './NewEmployeePage.module.scss'
 
 
 function NewRequestPage() {
 
-    const [lengthRequest, setLengthRequest] = useState(0);
-    const [selectedKindOfRequest, setSelectedKindOfRequest] = useState(null);
 
     const validate = values => {
         const errors = {};
 
-        setLengthRequest(values.description.length);
-
-        if (!values.name.match(/^[a-zA-Z]+$/)) {
-            errors.name = 'Invalid characters.';
+        if (values.name.length === 0) {
+            errors.name = 'This field is required.';
+        } else if (!values.name.match(/^[a-zA-Z]+$/)) {
+            errors.name = 'Invalid characters. The name must contain letters.';
         }
 
-        if (!values.surname.match(/^[a-zA-Z]+$/)) {
-            errors.surname = 'Invalid characters.';
+        if (values.surname.length === 0) {
+            errors.surname = 'This field is required.';
+        } else if (!values.surname.match(/^[a-zA-Z]+$/)) {
+            errors.surname = 'Invalid characters. The surname must contain letters.';
         }
 
-        //todo
-        if (!values.surname.match(/^[a-zA-Z]+$/)) {
-            errors.surname = 'Invalid characters.';
+        if (!values.email.match(/^\S+@\S+\.\S+$/)) {
+            errors.email = 'Invalid email.';
         }
 
-        if (lengthRequest > 5000) {
-            errors.description = 'Max length description request 5000';
+        if (values.position.length === 0) {
+            errors.position = 'This field is required.';
+        }
+
+        if (values.phone.length === 0) {
+            errors.phone = 'This field is required.';
+        } else if (!values.phone.match(/^\d{9}$/g)) {
+            errors.phone = 'Invalid phone number.';
+        }
+
+        if (values.password.length === 0) {
+            errors.password = 'This field is required.';
+        } else if (values.password.length < 5) {
+            errors.password = 'Invalid password. Password length must be at least 5 characters.';
+        }
+
+        if (values.passwordConfirm.length === 0) {
+            errors.passwordConfirm = 'This field is required.';
+        } else if (values.password !== values.passwordConfirm) {
+            errors.passwordConfirm = 'Password mismatch.';
+        }
+
+        if ((values.state !== "") && !values.state.match(/^[a-zA-Z]+$/)) {
+            errors.state = 'Invalid characters. The state must contain letters.';
+        }
+
+        if ((values.city !== "") && !values.city.match(/^[a-zA-Z]+$/)) {
+            errors.city = 'Invalid characters. The city must contain letters.';
+        }
+
+        if ((values.street !== "") && !values.street.match(/^[a-zA-Z1-9]+$/)) {
+            errors.street = 'Invalid characters. The street must contain letters or numbers.';
+        }
+
+        if ((values.postal !== "") && !values.postal.match(/^[1-9]{5}$/)) {
+            errors.postal = 'Invalid characters. The postal must contain 5 numbers.';
         }
 
         return errors;
     };
 
-    const kindOfRequestSelect = (e) => {
-        setSelectedKindOfRequest(e.target.value);
+    function contollAddAddress() {
+        //TODO add address to addressses
     }
+
 
     const formik = useFormik({
         initialValues: {
@@ -50,15 +83,14 @@ function NewRequestPage() {
             password: "",
             passwordConfirm: "",
             state: "",
-            city: "0",
+            city: "",
             street: "",
             postal: "",
+            address: [],
             addresses: []
         },
         validate,
         onSubmit: values => {
-
-            values.kindOfRequest = selectedKindOfRequest;
 
             axios.post(`http://localhost:8080/employee`,
                 {
@@ -113,7 +145,7 @@ function NewRequestPage() {
         <div className="window">
 
             <div onClick={(e) => e.stopPropagation()}
-                 className={'container'}>
+                 className={styles.container}>
 
                 <div className="modal-header">
                     <h1>Registration</h1>
@@ -121,8 +153,8 @@ function NewRequestPage() {
 
                 <form className="modal-form"
                       onSubmit={formik.handleSubmit}>
-                    <div>
-                        <label htmlFor="name">Name</label>
+                    <div className={styles.form}>
+                        <label htmlFor="name">Name*</label>
                         <input id="name"
                                className={formik.errors.name ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -132,7 +164,7 @@ function NewRequestPage() {
                         />
                         {formik.errors.name ? <div className="error">{formik.errors.name}</div> : null}
 
-                        <label htmlFor="surname">Surname</label>
+                        <label htmlFor="surname">Surname*</label>
                         <input id="surname"
                                className={formik.errors.surname ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -142,7 +174,7 @@ function NewRequestPage() {
                         />
                         {formik.errors.surname ? <div className="error">{formik.errors.surname}</div> : null}
 
-                        <label htmlFor="dateOfBirth">Date of Birth</label>
+                        <label htmlFor="dateOfBirth">Date of Birth*</label>
                         <input id="dateOfBirth"
                                className={formik.errors.dateOfBirth ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -152,7 +184,7 @@ function NewRequestPage() {
                         />
                         {formik.errors.dateOfBirth ? <div className="error">{formik.errors.dateOfBirth}</div> : null}
 
-                        <label htmlFor="gender">Gender</label>
+                        <label htmlFor="gender">Gender*</label>
                         <select id="gender"
                                 defaultChecked={genderOptions[0]}
                                 onChange={formik.handleChange}
@@ -165,7 +197,7 @@ function NewRequestPage() {
                         </select>
                         {formik.errors.gender ? <div className="error">{formik.errors.gender}</div> : null}
 
-                        <label htmlFor="position">Position</label>
+                        <label htmlFor="position">Position*</label>
                         <input id="position"
                                className={formik.errors.position ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -175,7 +207,7 @@ function NewRequestPage() {
                         />
                         {formik.errors.position ? <div className="error">{formik.errors.position}</div> : null}
 
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email*</label>
                         <input id="email"
                                className={formik.errors.email ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -186,7 +218,7 @@ function NewRequestPage() {
                         />
                         {formik.errors.email ? <div className="error">{formik.errors.email}</div> : null}
 
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone*</label>
                         <input id="phone"
                                className={formik.errors.phone ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -197,7 +229,7 @@ function NewRequestPage() {
                         />
                         {formik.errors.phone ? <div className="error">{formik.errors.phone}</div> : null}
 
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">Password*</label>
                         <input id="password"
                                className={formik.errors.password ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
@@ -208,9 +240,9 @@ function NewRequestPage() {
                         />
                         {formik.errors.password ? <div className="error">{formik.errors.password}</div> : null}
 
-                        <label htmlFor="passwordConfirm">Confirm password</label>
+                        <label htmlFor="passwordConfirm">Confirm password*</label>
                         <input id="passwordConfirm"
-                               className={formik.errors.password ? "input-primary error" : "input-primary correct"}
+                               className={formik.errors.passwordConfirm ? "input-primary error" : "input-primary correct"}
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.passwordConfirm}
@@ -221,7 +253,7 @@ function NewRequestPage() {
                             <div className="error">{formik.errors.passwordConfirm}</div> : null}
                     </div>
 
-                    <div>
+                    <div className={styles.address}>
                         <table>
                             <thead>
                             <tr>
@@ -229,7 +261,9 @@ function NewRequestPage() {
                             </tr>
                             </thead>
                             <tbody>
-                            {/*{body.map(row => <TableRow row={row}/>)}*/}
+                            {
+                                formik.values.addresses.map(address => address.map(pol => <td>{pol}</td>))
+                            }
                             </tbody>
                         </table>
 
@@ -259,7 +293,7 @@ function NewRequestPage() {
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.street}
-                               placeholder={""}
+                               placeholder={"street"}
                         />
                         {formik.errors.street ? <div className="error">{formik.errors.street}</div> : null}
 
@@ -269,25 +303,23 @@ function NewRequestPage() {
                                onChange={formik.handleChange}
                                onBlur={formik.handleBlur}
                                value={formik.values.postal}
-                               placeholder={""}
+                               placeholder={"19500"}
                         />
                         {formik.errors.postal ? <div className="error">{formik.errors.postal}</div> : null}
-
-                        {/*<div className="button-form">*/}
-                        {/*    <button className="send-button"*/}
-                        {/*            type="submit">*/}
-                        {/*        <span>ADD ADDRESS</span>*/}
-                        {/*    </button>*/}
-                        {/*</div>*/}
-
-                        <div className="button-form">
-                            <button className="button-primary"
-                                    type="submit">
-                                <span>CREATE EMPLOYEE</span>
-                            </button>
-                        </div>
+                        <button className="button-primary"
+                                onClick={contollAddAddress}>
+                            <span>ADD ADDRESS</span>
+                        </button>
                     </div>
+                    <button className="button-primary"
+                            type="submit">
+                        <span>CREATE EMPLOYEE</span>
+                    </button>
 
+                    <a className="registration-link"
+                       href="http://localhost:3000/login">
+                        SIGN IN
+                    </a>
                 </form>
             </div>
         </div>

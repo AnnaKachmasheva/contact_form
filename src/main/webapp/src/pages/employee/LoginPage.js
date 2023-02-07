@@ -1,23 +1,20 @@
 import {useFormik} from "formik";
 import {useState} from "react";
 import axios from "axios";
+import styles from './LoginPage.module.scss'
+
 
 function LoginPage() {
-
-    const [lengthRequest, setLengthRequest] = useState(0);
-    const [selectedKindOfRequest, setSelectedKindOfRequest] = useState(null);
 
     const validate = values => {
         const errors = {};
 
-        setLengthRequest(values.description.length);
-
-        if (!values.email.match(/^[a-zA-Z]+$/)) {
+        if (!values.email.match(/^\S+@\S+\.\S+$/)) {
             errors.email = 'Invalid email.';
         }
 
-        if (values.password.length <= 5) {
-            errors.password = 'Invalid password.';
+        if (values.password.length < 5) {
+            errors.password = 'Invalid password. Password length must be at least 5 characters.';
         }
 
         return errors;
@@ -30,10 +27,7 @@ function LoginPage() {
         },
         validate,
         onSubmit: values => {
-
-            values.kindOfRequest = selectedKindOfRequest;
-
-            axios.post(`http://localhost:8080/login`,
+            axios.post(`http://localhost:8080/employee/login`,
                 {
                     "email": values.email,
                     "password": values.password
@@ -49,7 +43,7 @@ function LoginPage() {
         <div className="window">
 
             <div onClick={(e) => e.stopPropagation()}
-                 className="container">
+                 className={styles.container}>
 
                 <div className="modal-header">
                     <h1>Sign in</h1>
@@ -58,19 +52,19 @@ function LoginPage() {
                 <form className="modal-form"
                       onSubmit={formik.handleSubmit}>
 
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email*</label>
                     <input id="email"
                            className={formik.errors.email ? "input-primary error" : "input-primary correct"}
                            onChange={formik.handleChange}
                            onBlur={formik.handleBlur}
                            value={formik.values.email}
                            type={"email"}
-                           placeholder={"mail@gmail.com"}
+                           placeholder={"smith@gmail.com"}
                     />
                     {formik.errors.email ? <div className="error">{formik.errors.email}</div> : null}
 
 
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password*</label>
                     <input id="password"
                            className={formik.errors.password ? "input-primary error" : "input-primary correct"}
                            onChange={formik.handleChange}
@@ -81,17 +75,15 @@ function LoginPage() {
                     />
                     {formik.errors.password ? <div className="error">{formik.errors.password}</div> : null}
 
-                    <div className="button-form">
-                        <a className="registration-link"
-                           href="http://localhost:3000/employee">
-                            Registration
-                        </a>
+                    <button className="button-primary"
+                            type="submit">
+                        <span>CONTUNE</span>
+                    </button>
 
-                        <button className="button-primary"
-                                type="submit">
-                            <span>CONTUNE</span>
-                        </button>
-                    </div>
+                    <a className="registration-link"
+                       href="http://localhost:3000/employee">
+                        REGISTRATION
+                    </a>
 
                 </form>
             </div>

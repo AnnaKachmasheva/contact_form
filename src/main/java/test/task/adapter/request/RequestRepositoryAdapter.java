@@ -9,4 +9,6 @@ public interface RequestRepositoryAdapter {
     Request createRequest(Request request);
 
     List<String> getAllKindOfRequest();
+
+    List<Request> getAllRequests();
 }

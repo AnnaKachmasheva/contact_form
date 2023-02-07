@@ -26,4 +26,9 @@ public class RequestAdapter {
     public List<String> findAllKindOfRequest() {
         return requestFacade.findAllKindOfRequest();
     }
+
+    public List<RequestDTO> getRequests() {
+        return request2RequestModelMapper.toRequestDTOList(requestFacade.getRequests());
+    }
+
 }

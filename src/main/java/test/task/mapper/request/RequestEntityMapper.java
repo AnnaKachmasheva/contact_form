@@ -5,6 +5,10 @@ import org.springframework.stereotype.Component;
 import test.task.domain.Request;
 import test.task.entity.KindOfRequestEntity;
 import test.task.entity.RequestEntity;
+import test.task.rest.DTO.RequestDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -21,5 +25,13 @@ public class RequestEntityMapper {
         request.setSurname(requestEntity.getSurname());
         request.setDescription(requestEntity.getDescription());
         return request;
+    }
+
+    public List<Request> toRequestList(List<RequestEntity> requestEntities) {
+        List<Request> requests = new ArrayList<>(requestEntities.size());
+        for (RequestEntity entity : requestEntities) {
+            requests.add(toRequest(entity));
+        }
+        return requests;
     }
 }

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import test.task.domain.Request;
 import test.task.rest.DTO.RequestDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class Request2RequestDTOMapper {
@@ -22,4 +25,11 @@ public class Request2RequestDTOMapper {
         return requestDTO;
     }
 
+    public List<RequestDTO> toRequestDTOList(List<Request> requests) {
+        List<RequestDTO> requestDTOS = new ArrayList<>(requests.size());
+        for (Request request : requests) {
+            requestDTOS.add(toRequestDTO(request));
+        }
+        return requestDTOS;
+    }
 }

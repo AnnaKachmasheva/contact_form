@@ -39,4 +39,11 @@ public class RequestJpaRepositoryAdapter implements RequestRepositoryAdapter {
         return kindOfRequestEntityMapper.toKindOfRequestNameList(kindOfRequestOptional);
     }
 
+    @Override
+    public List<Request> getAllRequests() {
+        var requestEntities = requestEntityRepository.findAll();
+        log.info(("Find {} requests."), requestEntities.size());
+        return requestEntityMapper.toRequestList(requestEntities);
+    }
+
 }

@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import test.task.adapter.request.RequestAdapter;
 import test.task.rest.DTO.RequestDTO;
 import test.task.rest.DTO.validator.RequestDTOValidator;
+import test.task.rest.interfaces.RequestController;
 import test.task.rest.util.RestUtil;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
 @RequestMapping("/contactus")
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
-public class RequestControllerImpl {
+public class RequestControllerImpl implements RequestController {
 
     private final RequestDTOValidator requestModelValidation;
     private final RequestAdapter requestAdapter;
@@ -31,8 +33,15 @@ public class RequestControllerImpl {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
+
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<String> getKindOfRequest() {
         return requestAdapter.findAllKindOfRequest();
+    }
+
+    @Override
+    public Set<RequestDTO> getRequests() {
+        return requestAdapter.getRequests();
     }
 }

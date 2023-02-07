@@ -1,0 +1,66 @@
+.board {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr;
+  grid-template-areas:
+    "employees requests"
+    "newemployee newerequests"
+    "documentation documentation";
+  justify-self: stretch;
+
+  a {
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+
+    margin: 4px 20px;
+    padding: 30px;
+
+    background: rgba(29, 93, 144, 0.5);
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+  }
+
+  a:hover {
+    background: rgb(29, 93, 144);
+  }
+
+  a:active {
+    background: rgb(2, 25, 46);
+    border-color: rgb(2, 25, 46);
+
+    box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.3);
+  }
+
+  .employees{
+    grid-area: employees;
+    background: rgba(29, 93, 144, 0.1);
+    color: #1d5d90;
+
+  }
+
+  .newemployee {
+    grid-area: newemployee;
+  }
+
+  .newerequests {
+    grid-area: newerequests;
+  }
+
+  .requests {
+    grid-area: requests;
+    background: rgba(29, 93, 144, 0.1);
+    color: #1d5d90;
+  }
+
+  .requests:hover, .employees:hover {
+    color: white;
+  }
+
+  .documentation{
+    grid-area: documentation;
+  }
+}

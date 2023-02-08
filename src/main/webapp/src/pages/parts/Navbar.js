@@ -27,12 +27,12 @@ export const Navbar = (props) => {
                     <>
                         <Link to={'/login'}>
                             <button className={'button-primary lg'}>
-                                Sign in
+                                SIGN IN
                             </button>
                         </Link>
                         <Link to={'/employee'}>
                             <button className={'button-primary lg'}>
-                                Registration
+                                REGISTRATION
                             </button>
                         </Link>
                     </>

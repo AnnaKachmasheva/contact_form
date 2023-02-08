@@ -1,4 +1,5 @@
 import styles from './Dashboard.module.scss'
+import {Link} from "react-router-dom";
 
 
 function Dashboard() {
@@ -6,21 +7,21 @@ function Dashboard() {
     return (
         <div className={styles.board}>
 
-            <a className={styles.employees}
-               href="http://localhost:3000/employee">count employee</a>
+            <Link className={styles.employees}
+                  to={'/employees'}>count employees</Link>
 
-            <a className={styles.newemployee}
-               href="http://localhost:3000/employee">add employee</a>
+            <Link className={styles.newemployee}
+                  to={'/employee'}>add employee</Link>
 
+            <Link className={styles.requests}
+                  to={'/contactus'}>count requests</Link>
 
-            <a className={styles.requests}
-               href="http://localhost:3000/contactus">count requests</a>
+            <Link className={styles.newerequests}
+                  to={'/contactus'}>add request</Link>
 
-            <a className={styles.newerequests}
-               href="http://localhost:3000/employee">add request</a>
+            <Link className={styles.documentation}
+                  to={'/documentation'}>documentation</Link>
 
-            <a className={styles.documentation}
-               href="http://localhost:3000/documentation">documentation</a>
 
         </div>
     )

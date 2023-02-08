@@ -2,6 +2,8 @@ import {useFormik} from "formik";
 import {useState} from "react";
 import axios from "axios";
 import styles from './LoginPage.module.scss'
+import {baseUrl, frontUrl} from "../../config/const";
+import {Link} from "react-router-dom";
 
 
 function LoginPage() {
@@ -27,7 +29,7 @@ function LoginPage() {
         },
         validate,
         onSubmit: values => {
-            axios.post(`http://localhost:8080/employee/login`,
+            axios.post(`${baseUrl}/employee/login`,
                 {
                     "email": values.email,
                     "password": values.password
@@ -80,10 +82,10 @@ function LoginPage() {
                         <span>CONTUNE</span>
                     </button>
 
-                    <a className="registration-link"
-                       href="http://localhost:3000/employee">
+                    <Link className={'registration-link'}
+                          to={'/employee'}>
                         REGISTRATION
-                    </a>
+                    </Link>
 
                 </form>
             </div>

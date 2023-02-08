@@ -1,6 +1,7 @@
 import {useFormik} from "formik";
 import axios from "axios";
 import styles from './NewEmployeePage.module.scss'
+import {Link} from "react-router-dom";
 
 
 function NewRequestPage() {
@@ -316,10 +317,11 @@ function NewRequestPage() {
                         <span>CREATE EMPLOYEE</span>
                     </button>
 
-                    <a className="registration-link"
-                       href="http://localhost:3000/login">
+
+                    <Link className={'registration-link'}
+                          to={'/login'}>
                         SIGN IN
-                    </a>
+                    </Link>
                 </form>
             </div>
         </div>

@@ -7,6 +7,7 @@ import LoginPage from "./pages/employee/LoginPage";
 import AboutUsPage from "./pages/global/AboutUsPage";
 import {DocumentationPage} from "./pages/global/DocumentationPage";
 import Dashboard from "./pages/employee/DashboardPage";
+import AllRequestsPage from "./pages/request/AllRequestPage";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/aboutus" element={<AboutUsPage/>}/>
+                    <Route path="/requests" element={<AllRequestsPage/>}/>
                     <Route path="/contactus" element={<NewRequestPage/>}/>
                     <Route path="/employee" element={<NewEmployeePage/>}/>
                     <Route path="/login" element={<LoginPage/>}/>

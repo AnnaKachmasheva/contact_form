@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Navbar} from "../parts/Navbar";
 import styles from './NewRequestPage.module.scss'
+import {baseUrl} from "../../config/const";
 
 function NewRequestPage() {
 
@@ -56,7 +57,7 @@ function NewRequestPage() {
 
             values.kindOfRequest = selectedKindOfRequest;
 
-            axios.post(`http://localhost:8080/contactus`,
+            axios.post(`${baseUrl}/contactus`,
                 {
                     "description": values.description,
                     "kindOfRequest": values.kindOfRequest,
@@ -77,7 +78,7 @@ function NewRequestPage() {
         const kindOfRequest = async () => {
 
             const options = await Promise.any([
-                axios.get('http://localhost:8080/contactus')]);
+                axios.get('${baseUrl}/contactus')]);
 
             setOptionsKindOfRequest(options.data);
         }

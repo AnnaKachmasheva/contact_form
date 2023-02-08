@@ -8,7 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import test.task.domain.Employee;
 import test.task.entity.EmployeeEntity;
 import test.task.entity.repository.EmployeeEntityRepository;
-import test.task.exeption.EmployeeNotFoundException;
+import test.task.exeption.NotFoundException;
 import test.task.mapper.employee.Employee2EmployeeEntityMapper;
 import test.task.mapper.employee.EmployeeEntityMapper;
 
@@ -51,7 +51,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
             return employee;
         } else {
             log.info(("Employee with id {} not found."), id);
-            throw new EmployeeNotFoundException("Employee not fond.");
+            throw new NotFoundException("Employee not fond.");
         }
     }
 
@@ -64,7 +64,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
             return employee;
         } else {
             log.info(("Employee with email {} not found."), email);
-            throw new EmployeeNotFoundException("Employee not fond.");
+            throw new NotFoundException("Employee not fond.");
         }
     }
 
@@ -96,7 +96,7 @@ public class EmployeeJpaRepositoryAdapter implements EmployeeRepositoryAdapter {
             return employeeEntityMapper.toEmployee(updatedEmployee);
         } else {
             log.info(("Employee with id {} not found."), employee.getId());
-            throw new EmployeeNotFoundException("Employee not fond.");
+            throw new NotFoundException("Employee not fond.");
         }
     }
 }

@@ -1,11 +1,15 @@
 package test.task.rest.interfaces;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import test.task.rest.DTO.AcceptedRequestDTO;
 import test.task.rest.DTO.RequestDTO;
+import test.task.security.CurrentUser;
+import test.task.security.model.UserDetailsImpl;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 
 public interface RequestController {
@@ -17,5 +21,12 @@ public interface RequestController {
     List<String> getKindOfRequest();
 
     // GET /requests
-    Set<RequestDTO> getRequests();
+    List<RequestDTO> getRequests();
+
+    // GET /request/{requestId}
+    RequestDTO getRequestById(@Valid @PathVariable Long id);
+
+    // POST /request/{requestId}
+    AcceptedRequestDTO acceptRequest(@Valid @PathVariable Long id, @CurrentUser UserDetailsImpl userDetails);
+
 }

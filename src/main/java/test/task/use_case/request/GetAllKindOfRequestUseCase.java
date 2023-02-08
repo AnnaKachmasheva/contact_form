@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GetAllKindOfRequest {
+public class GetAllKindOfRequestUseCase {
 
     private final RequestRepositoryAdapter adapter;
 

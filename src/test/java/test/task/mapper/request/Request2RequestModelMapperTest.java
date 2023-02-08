@@ -21,6 +21,7 @@ class Request2RequestModelMapperTest {
         Assertions.assertEquals(request.getPolicyNumber(), requestDTO.getPolicyNumber());
         Assertions.assertEquals(request.getDescription(), requestDTO.getDescription());
         Assertions.assertEquals(request.getKindOfRequest(), requestDTO.getKindOfRequest());
+        Assertions.assertEquals(request.getIsRemoved(), requestDTO.getIsRemoved());
     }
 
     @Test

@@ -13,5 +13,6 @@ public class Request {
     private String name;
     private String surname;
     private String description;
+    private Boolean isRemoved;
 
 }

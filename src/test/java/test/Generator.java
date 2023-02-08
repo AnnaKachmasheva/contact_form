@@ -1,15 +1,15 @@
 package test;
 
+import org.checkerframework.checker.units.qual.A;
 import org.h2.engine.User;
+import test.task.domain.AcceptedRequest;
 import test.task.domain.Address;
 import test.task.domain.Employee;
 import test.task.domain.Request;
-import test.task.entity.AddressEntity;
-import test.task.entity.EmployeeEntity;
-import test.task.entity.KindOfRequestEntity;
-import test.task.entity.RequestEntity;
+import test.task.entity.*;
 import test.task.entity.enums.Gender;
 import test.task.entity.enums.UserRole;
+import test.task.rest.DTO.AcceptedRequestDTO;
 import test.task.rest.DTO.AddressDTO;
 import test.task.rest.DTO.EmployeeDTO;
 import test.task.rest.DTO.RequestDTO;
@@ -115,13 +115,14 @@ public class Generator {
         return employeeEntity;
     }
 
-    public static RequestDTO generateValidRequestModel() {
+    public static RequestDTO generateValidRequestDTO() {
         RequestDTO requestModel = new RequestDTO();
         requestModel.setPolicyNumber("policyNumber" + randomString());
         requestModel.setName("name" + randomString());
         requestModel.setSurname("surname" + randomString());
         requestModel.setDescription("description" + randomString() + randomInt());
         requestModel.setKindOfRequest("kindOfRequest" + randomString());
+        requestModel.setIsRemoved(randomBoolean());
         return requestModel;
     }
 
@@ -135,6 +136,7 @@ public class Generator {
         KindOfRequestEntity kindOfRequestEntity = new KindOfRequestEntity();
         kindOfRequestEntity.setName("kindOfRequest" + randomString());
         requestEntity.setKindOfRequestEntity(kindOfRequestEntity);
+        requestEntity.setIsRemoved(randomBoolean());
         return requestEntity;
     }
 
@@ -146,29 +148,30 @@ public class Generator {
         request.setSurname("surname" + randomString());
         request.setDescription("description" + randomString() + randomInt());
         request.setKindOfRequest("kindOfRequest" + randomString());
+        request.setIsRemoved(randomBoolean());
         return request;
     }
 
     public static RequestDTO generateRequestDTOWithNotValidPolicyNumber() {
-        RequestDTO requestModel = generateValidRequestModel();
+        RequestDTO requestModel = generateValidRequestDTO();
         requestModel.setPolicyNumber(requestModel.getPolicyNumber() + "-");
         return requestModel;
     }
 
     public static RequestDTO generateRequestModelWithNotValidName() {
-        RequestDTO requestModel = generateValidRequestModel();
+        RequestDTO requestModel = generateValidRequestDTO();
         requestModel.setName(requestModel.getName() + randomInt());
         return requestModel;
     }
 
     public static RequestDTO generateRequestDTOWithNotValidSurname() {
-        RequestDTO requestModel = generateValidRequestModel();
+        RequestDTO requestModel = generateValidRequestDTO();
         requestModel.setSurname(requestModel.getSurname() + randomInt());
         return requestModel;
     }
 
     public static RequestDTO generateRequestDTOWithNotDescription() {
-        RequestDTO requestModel = generateValidRequestModel();
+        RequestDTO requestModel = generateValidRequestDTO();
         int length = 5001;
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -204,5 +207,37 @@ public class Generator {
         addressModel.setPostal("postal" + randomString() + randomInt());
         addressModel.setStreet("street" + randomString() + randomInt());
         return addressModel;
+    }
+
+    public static AcceptedRequest generateAcceptedRequest() {
+        AcceptedRequest acceptedRequest = new AcceptedRequest();
+        acceptedRequest.setId((long)randomInt());
+        acceptedRequest.setIsResolved(randomBoolean());
+        acceptedRequest.setDateOfAcceptance(LocalDate.now());
+        acceptedRequest.setDateOfDecision(LocalDate.now());
+        acceptedRequest.setRequest(generateValidRequest());
+        acceptedRequest.setEmployee(generateEmployee());
+        return acceptedRequest;
+    }
+
+    public static AcceptedRequestDTO generateAcceptedRequestDTO() {
+        AcceptedRequestDTO acceptedRequestDTO = new AcceptedRequestDTO();
+        acceptedRequestDTO.setId((long)randomInt());
+        acceptedRequestDTO.setIsResolved(randomBoolean());
+        acceptedRequestDTO.setDateOfAcceptance(LocalDate.now().toString());
+        acceptedRequestDTO.setDateOfDecision(LocalDate.now().toString());
+        acceptedRequestDTO.setRequestDTO(generateValidRequestDTO());
+        acceptedRequestDTO.setEmployeeDTO(generateEmployeeDTO());
+        return acceptedRequestDTO;
+    }
+
+    public static AcceptedRequestEntity generateAcceptedRequestEntity() {
+        AcceptedRequestEntity acceptedRequestEntity = new AcceptedRequestEntity();
+        acceptedRequestEntity.setIsResolved(randomBoolean());
+        acceptedRequestEntity.setDateOfAcceptance(LocalDate.now());
+        acceptedRequestEntity.setDateOfDecision(LocalDate.now());
+        acceptedRequestEntity.setEmployee(generateEmployeeEntity());
+        acceptedRequestEntity.setRequest(generateValidRequestEntity());
+        return acceptedRequestEntity;
     }
 }

@@ -15,5 +15,6 @@ public class RequestDTO {
     private String name;
     private String surname;
     private String policyNumber;
+    private Boolean isRemoved;
 
 }

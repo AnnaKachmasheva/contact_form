@@ -52,7 +52,7 @@ class RequestDTOValidationTest {
 
     @Test
     void validation_RequestModelIsValid() {
-        RequestDTO requestModel = Generator.generateValidRequestModel();
+        RequestDTO requestModel = Generator.generateValidRequestDTO();
         RequestDTOValidator requestModelValidation = mock(RequestDTOValidator.class);
 
         doNothing().when(requestModelValidation).validate(isA(RequestDTO.class));

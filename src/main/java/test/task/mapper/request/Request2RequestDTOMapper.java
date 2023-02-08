@@ -22,6 +22,7 @@ public class Request2RequestDTOMapper {
         requestDTO.setSurname(request.getSurname());
         requestDTO.setDescription(request.getDescription());
         requestDTO.setPolicyNumber(request.getPolicyNumber());
+        requestDTO.setIsRemoved(request.getIsRemoved());
         return requestDTO;
     }
 

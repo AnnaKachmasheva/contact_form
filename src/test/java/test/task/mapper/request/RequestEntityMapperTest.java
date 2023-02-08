@@ -22,6 +22,7 @@ class RequestEntityMapperTest {
         Assertions.assertEquals(requestEntity.getPolicyNumber(), request.getPolicyNumber());
         Assertions.assertEquals(requestEntity.getDescription(), request.getDescription());
         Assertions.assertEquals(requestEntity.getKindOfRequestEntity().getName(), request.getKindOfRequest());
+        Assertions.assertEquals(requestEntity.getIsRemoved(), request.getIsRemoved());
     }
 
     @Test

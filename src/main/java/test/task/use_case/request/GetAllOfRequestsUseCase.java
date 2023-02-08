@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GetAllOfRequests {
+public class GetAllOfRequestsUseCase {
 
     private final RequestRepositoryAdapter adapter;
 

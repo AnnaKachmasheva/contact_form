@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class RequestEntity extends AbstractClassEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private KindOfRequestEntity kindOfRequestEntity;
 
     @Column(nullable = false, name = "policy_number")
@@ -33,6 +33,10 @@ public class RequestEntity extends AbstractClassEntity {
     @Basic(optional = false)
     private String description;
 
+    @Basic(optional = false)
+    @Column(nullable = false, name = "is_removed")
+    private Boolean isRemoved;
+
     @Override
     public String toString() {
         return "RequestEntity{" +
@@ -41,6 +45,7 @@ public class RequestEntity extends AbstractClassEntity {
                 ", name='" + name +
                 ", surname='" + surname +
                 ", description='" + description +
+                ", is removed='" + isRemoved +
                 '}';
     }
 }

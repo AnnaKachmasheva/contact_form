@@ -14,7 +14,7 @@ import test.task.domain.Employee;
 import test.task.entity.enums.Gender;
 import test.task.entity.enums.UserRole;
 import test.task.entity.repository.EmployeeEntityRepository;
-import test.task.exeption.EmployeeNotFoundException;
+import test.task.exeption.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +93,7 @@ class EmployeeJpaRepositoryAdapterTest {
         Employee savedEmployee = employeeJpaRepositoryAdapter.createEmployee(employee);
 
         assertThatThrownBy(() -> employeeJpaRepositoryAdapter.getEmployeeById(savedEmployee.getId() + 1))
-                .isInstanceOf(EmployeeNotFoundException.class);
+                .isInstanceOf(NotFoundException.class);
     }
 
     @Test
@@ -117,7 +117,7 @@ class EmployeeJpaRepositoryAdapterTest {
         Employee savedEmployee = employeeJpaRepositoryAdapter.createEmployee(employee);
 
         assertThatThrownBy(() -> employeeJpaRepositoryAdapter.getEmployeeByEmail(savedEmployee.getEmail() + "email"))
-                .isInstanceOf(EmployeeNotFoundException.class);
+                .isInstanceOf(NotFoundException.class);
     }
 
     @Test

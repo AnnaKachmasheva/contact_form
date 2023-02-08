@@ -21,6 +21,7 @@ public class Request2RequestEntityMapper {
         requestEntity.setName(request.getName());
         requestEntity.setSurname(request.getSurname());
         requestEntity.setDescription(request.getDescription());
+        requestEntity.setIsRemoved(request.getIsRemoved());
         return requestEntity;
     }
 }

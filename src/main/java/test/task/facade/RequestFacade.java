@@ -2,10 +2,9 @@ package test.task.facade;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import test.task.domain.AcceptedRequest;
 import test.task.domain.Request;
-import test.task.use_case.request.CreateRequestUseCase;
-import test.task.use_case.request.GetAllKindOfRequest;
-import test.task.use_case.request.GetAllOfRequests;
+import test.task.use_case.request.*;
 
 import java.util.List;
 
@@ -14,8 +13,10 @@ import java.util.List;
 public class RequestFacade {
 
     private final CreateRequestUseCase createRequestUseCase;
-    private final GetAllKindOfRequest getAllKindOfRequest;
-    private final GetAllOfRequests getAllOfRequests;
+    private final GetAllKindOfRequestUseCase getAllKindOfRequest;
+    private final GetAllOfRequestsUseCase getAllOfRequests;
+    public final GetRequestByIdUseCase getRequestByIdUseCase;
+    public final AcceptRequestUseCase acceptRequestUseCase;
 
     public Request createRequest(Request request) {
         return createRequestUseCase.execute(request);
@@ -27,6 +28,14 @@ public class RequestFacade {
 
     public List<Request> getRequests() {
         return getAllOfRequests.execute();
+    }
+
+    public Request getRequestById(Long id) {
+        return getRequestByIdUseCase.execute(id);
+    }
+
+    public AcceptedRequest acceptRequest(String email, Long id) {
+        return acceptRequestUseCase.execute(email, id);
     }
 
 }

@@ -13,7 +13,7 @@ class RequestModel2RequestMapperTest {
 
     @Test
     void toRequest_RequestModel_Request() {
-        RequestDTO requestDTO = Generator.generateValidRequestModel();
+        RequestDTO requestDTO = Generator.generateValidRequestDTO();
         Request request = requestModel2RequestMapper.toRequest(requestDTO);
 
         Assertions.assertEquals(requestDTO.getId(), request.getId());
@@ -22,6 +22,7 @@ class RequestModel2RequestMapperTest {
         Assertions.assertEquals(requestDTO.getPolicyNumber(), request.getPolicyNumber());
         Assertions.assertEquals(requestDTO.getDescription(), request.getDescription());
         Assertions.assertEquals(requestDTO.getKindOfRequest(), request.getKindOfRequest());
+        Assertions.assertEquals(requestDTO.getIsRemoved(), request.getIsRemoved());
     }
 
     @Test

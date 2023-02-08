@@ -19,6 +19,7 @@ public class RequestDTO2RequestMapper {
         request.setDescription(requestDTO.getDescription());
         request.setPolicyNumber(requestDTO.getPolicyNumber());
         request.setKindOfRequest(requestDTO.getKindOfRequest());
+        request.setIsRemoved(requestDTO.getIsRemoved());
         return request;
     }
 
